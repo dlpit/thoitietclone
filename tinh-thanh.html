@@ -933,7 +933,6 @@
 									</div>
 								</div>
 							</div>
-
 							<!-- Hourly Weather Information Section -->
 							<div class="weather-detail h-fit mt-4">
 								<div class="flex justify-between items-center mb-4">
@@ -951,32 +950,7 @@
 								</div>
 
 								<!-- Carousel Container -->
-								<div class="relative" x-data="{ 
-									currentIndex: 0, 
-									totalCards: 6, 
-									visibleCards: 4,
-									maxIndex: 2,
-									autoPlay: true,
-									init() {
-										this.startAutoPlay();
-									},
-									startAutoPlay() {
-										if (this.autoPlay) {
-											setInterval(() => {
-												this.next();
-											}, 5000);
-										}
-									},
-									next() {
-										this.currentIndex = this.currentIndex >= this.maxIndex ? 0 : this.currentIndex + 1;
-									},
-									prev() {
-										this.currentIndex = this.currentIndex <= 0 ? this.maxIndex : this.currentIndex - 1;
-									},
-									getTranslateX() {
-										return `translateX(-${this.currentIndex * 25}%)`;
-									}
-								}">
+								<div class="relative" x-data="weatherCarousel()">
 									<!-- Carousel Content -->
 									<div class="overflow-hidden">
 										<div class="flex transition-transform duration-500 ease-in-out" 
@@ -1118,14 +1092,29 @@
 									</div>
 
 									<!-- Navigation Buttons -->
-									<button @click="prev()" 
+									<button @click="manualPrev()" 
 										class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-8 h-8 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors">
 										<i data-lucide="chevron-left" class="w-4 h-4"></i>
 									</button>
-									<button @click="next()" 
+									<button @click="manualNext()" 
 										class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-8 h-8 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors">
 										<i data-lucide="chevron-right" class="w-4 h-4"></i>
 									</button>
+								</div>
+							</div>
+
+							<!-- 12-Hour Temperature and Rain Chart Section -->
+							<div class="weather-detail h-fit mt-4">
+								<div class="location-name flex items-center gap-2 mb-4">
+									<span class="location-name-icon flex items-center">
+										<i data-lucide="bar-chart" class="w-4 h-4"></i>
+									</span>
+									<h2 class="text-lg font-bold text-white">
+										Nhiệt độ và khả năng có mưa Hà Giang trong 12h tới
+									</h2>
+								</div>
+								<div class="chart-container bg-white rounded-xl p-4" style="height: 400px;">
+									<canvas id="rainHour"></canvas>
 								</div>
 							</div>
 						</div>
@@ -1373,6 +1362,8 @@
 			crossorigin="anonymous"
 			></script>
 		<script src="/js/bootstrap-autocomplete.min.js"></script>
+		<!-- Chart.js CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<!-- Custom JavaScript -->
 		<script src="./js/utils.js"></script>
 		<script src="./js/components.js"></script>
@@ -1404,5 +1395,7 @@
 		<!-- Custom JavaScript Files -->
 		<script src="js/lucide-init.js"></script>
 		<script src="js/navigation.js"></script>
+		<script src="js/carousel.js"></script>
+		<script src="js/weather-chart.js"></script>
 	</body>
 </html>
