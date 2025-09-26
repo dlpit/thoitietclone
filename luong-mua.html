@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="vi">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Trang thông tin dự báo thời tiết Việt Nam - Thoitiet.vn</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+		<link rel="stylesheet" href="./dist/styles.css">
+		<style>
+			body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: #275eaf;
+			min-height: 100vh;
+			}
+			.weather-card {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(15px);
+			border-radius: 20px;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			}
+			.weather-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+			}
+			.current-weather {
+			background: rgba(255, 255, 255, 0.15);
+			backdrop-filter: blur(20px);
+			color: white;
+			border-radius: 25px;
+			padding: 2rem;
+			box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			}
+			.temperature {
+			font-size: 3rem;
+			font-weight: bold;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+			}
+			.weather-icon {
+			width: 80px;
+			height: 80px;
+			filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+			}
+			.city-card {
+			background: rgba(255, 255, 255, 0.01);
+			backdrop-filter: blur(15px);
+			border-radius: 18px;
+			padding: 1.5rem;
+			text-align: center;
+			transition: all 0.3s ease;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+			}
+			.city-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+			border-color: rgba(255, 255, 255, 0.3);
+			background: rgba(255, 255, 255, 0.1);
+			}
+			.city-card img {
+			width: 60px;
+			height: 60px;
+			margin-bottom: 1rem;
+			}
+			.navbar {
+			background: rgba(255, 255, 255, 0.98) !important;
+			backdrop-filter: blur(15px);
+			box-shadow: 0 4px 25px rgba(116, 185, 255, 0.15);
+			border-bottom: 1px solid rgba(116, 185, 255, 0.1);
+			}
+			.navbar-brand img {
+			max-height: 50px;
+			}
+			.search-input {
+			border-radius: 25px;
+			border: 2px solid #74b9ff;
+			padding: 0.75rem 1.5rem;
+			transition: all 0.3s ease;
+			background: rgba(255, 255, 255, 0.9);
+			}
+			.search-input:focus {
+			border-color: #0984e3;
+			box-shadow: 0 0 0 0.2rem rgba(116, 185, 255, 0.25);
+			background: rgba(255, 255, 255, 1);
+			}
+			.news-card {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(15px);
+			border-radius: 20px;
+			box-shadow: 0 10px 35px rgba(116, 185, 255, 0.15);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			}
+			.news-item {
+			border-bottom: 1px solid rgba(116, 185, 255, 0.1);
+			padding: 1rem 0;
+			transition: background-color 0.3s ease;
+			}
+			.news-item:hover {
+			background-color: rgba(116, 185, 255, 0.05);
+			border-radius: 10px;
+			}
+			.news-item:last-child {
+			border-bottom: none;
+			}
+			.footer {
+			background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+			color: white;
+			margin-top: 3rem;
+			}
+			.social-footer {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			border-radius: 50%;
+			margin: 0 5px;
+			transition: all 0.3s ease;
+			}
+			.social-footer:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+			}
+			.social-facebook { background: linear-gradient(135deg, #3b5998 0%, #2d4373 100%); }
+			.social-twitter { background: linear-gradient(135deg, #1da1f2 0%, #0c7cd5 100%); }
+			.social-instagram { background: linear-gradient(135deg, #e1306c 0%, #c13584 100%); }
+			.social-youtube { background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); }
+			.megamenu {
+			background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+			border-radius: 15px;
+			box-shadow: 0 15px 40px rgba(116, 185, 255, 0.2);
+			padding: 2rem;
+			border: 1px solid rgba(116, 185, 255, 0.1);
+			z-index: 99999 !important;
+			position: relative;
+			}
+			/* Đảm bảo navbar có z-index thấp hơn megamenu */
+			nav {
+			position: relative;
+			z-index: 1000;
+			}
+			.mega-submenu li {
+			margin-bottom: 0.5rem;
+			}
+			.mega-submenu a {
+			color: #495057;
+			text-decoration: none;
+			transition: color 0.3s ease;
+			}
+			.mega-submenu a:hover {
+			color: #0984e3;
+			}
+			.timer {
+			font-weight: bold;
+			color: #74b9ff;
+			}
+			.location-name {
+			font-size: 1.5rem;
+			font-weight: bold;
+			margin-bottom: 1rem;
+			}
+			.weather-detail {
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 15px;
+			padding: 1rem;
+			margin: 0.5rem 0;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			backdrop-filter: blur(10px);
+			}
+			.separator-dashed {
+			border-top: 1px dashed rgba(255, 255, 255, 0.3);
+			margin: 1rem 0;
+			}
+			.news-category-tag {
+			background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+			}
+			.header-gradient {
+			background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+			backdrop-filter: blur(10px);
+			}
+			@media (max-width: 768px) {
+			.temperature {
+			font-size: 2rem;
+			}
+			.weather-icon {
+			width: 60px;
+			height: 60px;
+			}
+			.current-weather {
+			padding: 1.5rem;
+			}
+			}
+			.social-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			text-decoration: none;
+			color: white;
+			font-size: 18px;
+			transition: all 0.3s ease;
+			}
+			.social-link:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			}
+		</style>
+	</head>
+	<body>
+		<header class="bg-white">
+			<div class="py-2 border-b shadow-sm header-gradient">
+				<div class="max-w-7xl mx-auto px-4">
+					<div class="flex items-center justify-between flex-wrap">
+						<div class="w-full md:w-1/3 order-0">
+							<div class="header-location flex items-center">
+								<span class="mr-2">
+								<i class="bi bi-geo-alt text-blue-600"></i>
+								Thành phố của bạn:
+								</span>
+								<a class="text-blue-600 hover:text-blue-800 no-underline" href="#">
+								Hà Nội
+								</a>
+								<button class="ml-2 text-gray-500 hover:text-gray-700 p-0" onclick="changeLocation()">
+								<i class="bi bi-arrow-repeat"></i>
+								Thay đổi
+								</button>
+							</div>
+						</div>
+						<div class="w-full md:w-1/3 order-3 md:order-2 text-center">
+							<h1 class="text-lg mb-0 font-bold text-blue-700">Dự báo thời tiết Việt Nam</h1>
+						</div>
+						<div class="w-full md:w-1/3 order-2 md:order-3">
+							<div class="header-timer text-right">
+								<span class="mr-2">
+								<i class="bi bi-clock text-blue-400"></i>
+								Giờ địa phương:
+								</span>
+								<span class="timer font-bold text-blue-400" id="timer">09:46 | 22/09/2025</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav class="navbar sticky-top bg-white bg-opacity-98 backdrop-blur-md shadow-lg border-b border-blue-100">
+			<div class="max-w-7xl mx-auto px-4 w-full">
+				<div class="flex items-center justify-between w-full">
+					<a class="flex items-center" href="#">
+					<img src="./assets/logo-header.png" class="h-12 hidden md:block" alt="Logo">
+					<img src="./assets/logo-mobile.png" class="h-10 block md:hidden" alt="Logo Mobile">
+					</a>
+					<button class="lg:hidden flex flex-col justify-center items-center w-8 h-8 border-0 bg-transparent" type="button" id="navbarToggle" onclick="toggleNavbar()">
+					<span class="w-6 h-0.5 bg-gray-600 mb-1"></span>
+					<span class="w-6 h-0.5 bg-gray-600 mb-1"></span>
+					<span class="w-6 h-0.5 bg-gray-600"></span>
+					</button>
+					<div class="hidden lg:flex items-center space-x-6" id="navbarCollapse">
+						<div class="hidden lg:block">
+							<div class="flex">
+								<input type="search" class="search-input px-4 py-2 border-2 border-blue-400 rounded-l-full bg-white bg-opacity-90 focus:border-blue-600 focus:shadow-lg focus:bg-white transition-all duration-300" placeholder="Nhập tên địa điểm..." autocomplete="off">
+								<button class="px-4 py-2 border-2 border-blue-400 border-l-0 rounded-r-full text-blue-400 hover:bg-blue-50 transition-colors" type="button">
+								<i class="bi bi-search"></i>
+								</button>
+							</div>
+						</div>
+						<ul class="flex items-center space-x-6">
+							<li class="relative group">
+								<a class="flex items-center text-gray-700 hover:text-blue-600 transition-colors cursor-pointer" href="#" onclick="toggleDropdown(event)">
+								<i class="bi bi-pin-map mr-1"></i>
+								Tỉnh - Thành phố
+								<i class="bi bi-chevron-down ml-1"></i>
+								</a>
+								<div class="megamenu fixed top-full left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-5xl bg-white rounded-2xl shadow-2xl border border-blue-100 p-8 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[9999]" id="megaMenu">
+									<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+										<div>
+											<div class="col-megamenu">
+												<h6 class="font-semibold text-gray-800 mb-4">Đông Bắc Bộ</h6>
+												<ul class="mega-submenu space-y-2">
+													<li>
+														<a href="/ha-giang" title="Hà Giang" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hà Giang
+														</a>
+													</li>
+													<li>
+														<a href="/cao-bang" title="Cao Bằng" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Cao Bằng
+														</a>
+													</li>
+													<li>
+														<a href="/bac-kan" title="Bắc Kạn" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Bắc Kạn
+														</a>
+													</li>
+													<li>
+														<a href="/tuyen-quang" title="Tuyên Quang" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Tuyên Quang
+														</a>
+													</li>
+													<li>
+														<a href="/thai-nguyen" title="Thái Nguyên" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Thái Nguyên
+														</a>
+													</li>
+													<li>
+														<a href="/lang-son" title="Lạng Sơn" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Lạng Sơn
+														</a>
+													</li>
+													<li>
+														<a href="/quang-ninh" title="Quảng Ninh" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Quảng Ninh
+														</a>
+													</li>
+													<li>
+														<a href="/bac-giang" title="Bắc Giang" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Bắc Giang
+														</a>
+													</li>
+													<li>
+														<a href="/phu-tho" title="Phú Thọ" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Phú Thọ
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div>
+											<div class="col-megamenu">
+												<h6 class="font-semibold text-gray-800 mb-4">Tây Bắc Bộ</h6>
+												<ul class="mega-submenu space-y-2">
+													<li>
+														<a href="/lao-cai" title="Lào Cai" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Lào Cai
+														</a>
+													</li>
+													<li>
+														<a href="/dien-bien" title="Điện Biên" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Điện Biên
+														</a>
+													</li>
+													<li>
+														<a href="/lai-chau" title="Lai Châu" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Lai Châu
+														</a>
+													</li>
+													<li>
+														<a href="/son-la" title="Sơn La" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Sơn La
+														</a>
+													</li>
+													<li>
+														<a href="/yen-bai" title="Yên Bái" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Yên Bái
+														</a>
+													</li>
+													<li>
+														<a href="/hoa-binh" title="Hoà Bình" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hoà Bình
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div>
+											<div class="col-megamenu">
+												<h6 class="font-semibold text-gray-800 mb-4">Đồng bằng sông Hồng</h6>
+												<ul class="mega-submenu space-y-2">
+													<li>
+														<a href="/ha-noi" title="Hà Nội" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hà Nội
+														</a>
+													</li>
+													<li>
+														<a href="/vinh-phuc" title="Vĩnh Phúc" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Vĩnh Phúc
+														</a>
+													</li>
+													<li>
+														<a href="/bac-ninh" title="Bắc Ninh" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Bắc Ninh
+														</a>
+													</li>
+													<li>
+														<a href="/hai-duong" title="Hải Dương" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hải Dương
+														</a>
+													</li>
+													<li>
+														<a href="/hai-phong" title="Hải Phòng" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hải Phòng
+														</a>
+													</li>
+													<li>
+														<a href="/hung-yen" title="Hưng Yên" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hưng Yên
+														</a>
+													</li>
+													<li>
+														<a href="/thai-binh" title="Thái Bình" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Thái Bình
+														</a>
+													</li>
+													<li>
+														<a href="/ha-nam" title="Hà Nam" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Hà Nam
+														</a>
+													</li>
+													<li>
+														<a href="/nam-dinh" title="Nam Định" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Nam Định
+														</a>
+													</li>
+													<li>
+														<a href="/ninh-binh" title="Ninh Bình" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+														<i class="bi bi-arrow-right-short mr-2"></i>
+														Ninh Bình
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div>
+											<div class="col-megamenu">
+												<h6 class="font-semibold text-gray-800 mb-4">Các vùng khác</h6>
+												<div class="grid grid-cols-1 gap-6">
+													<div>
+														<h6 class="font-medium text-gray-700 mb-2">Bắc Trung Bộ</h6>
+														<ul class="mega-submenu space-y-1">
+															<li><a href="/thanh-hoa" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Thanh Hóa</a></li>
+															<li><a href="/nghe-an" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Nghệ An</a></li>
+															<li><a href="/ha-tinh" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Hà Tĩnh</a></li>
+															<li><a href="/quang-binh" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Quảng Bình</a></li>
+															<li><a href="/quang-tri" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Quảng Trị</a></li>
+															<li><a href="/thua-thien-hue" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Thừa Thiên Huế</a></li>
+														</ul>
+													</div>
+													<div>
+														<h6 class="font-medium text-gray-700 mb-2">Nam Trung Bộ</h6>
+														<ul class="mega-submenu space-y-1">
+															<li><a href="/da-nang" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Đà Nẵng</a></li>
+															<li><a href="/quang-nam" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Quảng Nam</a></li>
+															<li><a href="/ho-chi-minh" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Hồ Chí Minh</a></li>
+															<li><a href="/can-tho" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm"><i class="bi bi-arrow-right-short mr-1"></i>Cần Thơ</a></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<a rel="nofollow" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors" href="/luong-mua">
+								<i class="bi bi-cloud-lightning-rain mr-1"></i>
+								Lượng mưa
+								</a>
+							</li>
+							<li>
+								<a rel="nofollow" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors" href="/tin-tong-hop/kham-pha">
+								<i class="bi bi-rss mr-1"></i>
+								Khám phá
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<main class="py-4 relative z-1">
+			<section class="section-container">
+				<div class="max-w-7xl mx-auto px-4">
+					<div class="flex flex-wrap lg:flex-nowrap gap-6">
+						<!--Danh sách thành phố, điểm đến, núi-->
+						<div class="w-full lg:w-2/3 order-1 lg:order-0">
+							<h2 class="text-2xl mb-4 text-white font-bold">Dự báo thời tiết các Tỉnh/Thành phố</h2>
+							<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+								<div class="city-card">
+									<a href="#" class="no-underline text-white block">
+										<h5 class="font-bold mb-3 text-white">Hà Giang</h5>
+										<div class="flex justify-center mb-3">
+											<img src="https://data.thoitiet.vn/weather/icons/10d@2x.png" alt="Hà Giang" class="weather-icon">
+										</div>
+										<div class="flex justify-center items-center mb-2">
+											<i class="bi bi-droplet mr-1 text-blue-200"></i>
+											<small class="text-blue-100">94%</small>
+										</div>
+										<p class="mb-2 text-blue-100">Mưa vừa</p>
+										<div class="flex justify-center items-center">
+											<span class="font-bold mr-2 text-white">27.7°</span>
+											<span class="text-blue-200">/</span>
+											<span class="text-blue-100 ml-2">31.6°</span>
+										</div>
+									</a>
+								</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Cao Bằng</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Cao Bằng" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet mr-1 text-blue-200"></i>
+													<small class="text-blue-100">76%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Nhiều mây</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold mr-2 text-white">27.8°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">29°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Lào Cai</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/10d@2x.png" alt="Lào Cai" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">97%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Mưa cường độ nặng</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">26.1°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">27.9°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Điện Biên</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/10d@2x.png" alt="Điện Biên" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">82%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Mưa vừa</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">26.8°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">26.1°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Hà Nội</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Hà Nội" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">83%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Nhiều mây</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">29.5°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">35.3°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Hải Phòng</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/10d@2x.png" alt="Hải Phòng" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">91%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Mưa nhẹ</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">30.5°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">37.2°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Thanh Hóa</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Thanh Hóa" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">82%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Nhiều mây</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">28°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">33°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Quảng Trị</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Quảng Trị" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">65%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Mây cụm</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">31°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">34.1°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Đà Nẵng</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Đà Nẵng" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">70%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Nhiều mây</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">30°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">33.9°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Quảng Ngãi</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Quảng Ngãi" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">68%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Mây cụm</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">30.2°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">34.4°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Bình Thuận</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Bình Thuận" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">94%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Nhiều mây</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">25.3°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">26.1°</span>
+												</div>
+											</a>
+										</div>
+										<div class="city-card">
+											<a href="#" class="no-underline text-white block">
+												<h5 class="font-bold mb-3 text-white">Cà Mau</h5>
+												<div class="flex justify-center mb-3">
+													<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Cà Mau" class="weather-icon">
+												</div>
+												<div class="flex justify-center items-center mb-2">
+													<i class="bi bi-droplet text-blue-200 mr-1"></i>
+													<small class="text-blue-100">71%</small>
+												</div>
+												<p class="mb-2 text-blue-100">Nhiều mây</p>
+												<div class="flex justify-center items-center">
+													<span class="font-bold text-white mr-2">29.2°</span>
+													<span class="text-blue-200">/</span>
+													<span class="text-blue-100 ml-2">33.9°</span>
+												</div>
+											</a>
+										</div>
+							</div>
+						</div>
+						<!--Thông tin thời tiết hiện tại-->
+						<div class="w-full lg:w-1/3 order-0 lg:order-1">
+							<div class="current-weather weather-card">
+								<div class="location-name text-center mb-4">
+									<div class="flex items-center justify-center mb-3">
+										<i class="bi bi-geo-alt mr-2"></i>
+										<h4 class="mb-0">Hà Nội</h4>
+									</div>
+									<small class="text-white opacity-75">Đã cập nhật 8 phút trước</small>
+								</div>
+								<div class="text-center mb-4">
+									<div class="flex items-center justify-center mb-3">
+										<img src="https://data.thoitiet.vn/weather/icons/04d@2x.png" alt="Nhiều mây" class="weather-icon mr-3">
+										<div class="temperature">29.8°</div>
+										<div class="unit-group ml-3">
+											<button class="px-3 py-1 text-sm border border-white border-opacity-50 text-white rounded mr-1 hover:bg-white hover:text-blue-600 transition-colors">C</button>
+											<button class="px-3 py-1 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">F</button>
+										</div>
+									</div>
+									<div class="mb-3">
+										<h5 class="mb-1">Nhiều mây</h5>
+										<small class="text-white opacity-75">Cảm giác như 35.7°</small>
+									</div>
+									<div class="weather-feature mb-4">
+										<h5 class="mb-3">Dự báo những ngày tới</h5>
+										<div class="grid grid-cols-2 gap-2">
+											<button class="px-3 py-2 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">Hôm nay</button>
+											<button class="px-3 py-2 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">Ngày mai</button>
+											<button class="px-3 py-2 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">3 ngày</button>
+											<button class="px-3 py-2 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">5 ngày</button>
+											<button class="px-3 py-2 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">7 ngày</button>
+											<button class="px-3 py-2 text-sm border border-white border-opacity-50 text-white rounded hover:bg-white hover:text-blue-600 transition-colors">10 ngày</button>
+										</div>
+									</div>
+									<div class="weather-detail">
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-sun mr-2"></i>
+												<span>Mặt trời mọc/lặn</span>
+											</div>
+											<div class="text-right">
+												<div><i class="bi bi-sunrise mr-1"></i>05:45</div>
+												<div><i class="bi bi-sunset mr-1"></i>17:53</div>
+											</div>
+										</div>
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-thermometer mr-2"></i>
+												<span>Thấp/Cao</span>
+											</div>
+											<span class="font-bold">24.8°/34°</span>
+										</div>
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-droplet mr-2"></i>
+												<span>Độ ẩm</span>
+											</div>
+											<span class="font-bold">83%</span>
+										</div>
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-speedometer2 mr-2"></i>
+												<span>Áp suất</span>
+											</div>
+											<span class="font-bold">1009 mb</span>
+										</div>
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-eye mr-2"></i>
+												<span>Tầm nhìn</span>
+											</div>
+											<span class="font-bold">10 km</span>
+										</div>
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-wind mr-2"></i>
+												<span>Gió</span>
+											</div>
+											<span class="font-bold">2.94 km/giờ</span>
+										</div>
+										<div class="flex justify-between items-center mb-3">
+											<div class="flex items-center">
+												<i class="bi bi-thermometer-half mr-2"></i>
+												<span>Điểm ngưng</span>
+											</div>
+											<span class="font-bold">26.5°C</span>
+										</div>
+										<div class="flex justify-between items-center">
+											<div class="flex items-center">
+												<i class="bi bi-sun mr-2"></i>
+												<span>Chỉ số UV</span>
+											</div>
+											<span class="font-bold">3.52</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="py-5">
+				<div class="max-w-7xl mx-auto px-4">
+					<h3 class="text-3xl mb-4 text-white font-bold text-center">Tin tức thời tiết</h3>
+					<div class="news-card p-4">
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+							<div>
+								<div class="news-item">
+									<div class="img-container mb-3">
+										<img src="https://data.thoitiet.vn/weather/2022/1/4/tia-uv-la-gi.jpg" class="w-full rounded" alt="Tia UV là gì? Cách bảo vệ da dưới tác hại của tia UV">
+									</div>
+									<span class="inline-block px-3 py-1 mb-2 text-white text-sm rounded news-category-tag">Tin tổng hợp</span>
+									<h5 class="font-bold mb-2">
+										<a href="#" class="no-underline text-gray-800 hover:text-blue-600 transition-colors">Tia UV là gì? Cách bảo vệ da dưới tác hại của tia UV</a>
+									</h5>
+									<p class="text-gray-500">
+										Tia UV có lẽ là kẻ thù lớn nhất đối với làn da của chúng ta. Không những thể còn chứa nhiều tiềm ẩn lớn gây tổn thương mắt và nhiều vấn đề khác. Vậy các bạn đã hiểu tia Uv là gì? Tác hại của tia Uv như thế nào đối với chúng ta hay chưa.
+									</p>
+								</div>
+							</div>
+							<div>
+								<div class="news-item">
+									<div class="flex mb-3">
+										<img src="https://data.thoitiet.vn/weather/2021/11/30/hoang-hon-la-gi.jpg" class="w-32 h-20 object-cover rounded mr-3" alt="Hoàng hôn là gì ? 6+ ý nghĩa kỳ diệu của hoàng hôn">
+										<div class="flex-1">
+											<span class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag">Tin tổng hợp</span>
+											<h6 class="font-bold mb-2">
+												<a href="#" class="no-underline text-gray-800 hover:text-blue-600 transition-colors">Hoàng hôn là gì ? 6+ ý nghĩa kỳ diệu của hoàng hôn</a>
+											</h6>
+										</div>
+									</div>
+								</div>
+								<div class="news-item">
+									<div class="flex mb-3">
+										<img src="https://data.thoitiet.vn/weather/2022/7/29/mua-dong.jpg" class="w-32 h-20 object-cover rounded mr-3" alt="Tin thời tiết ba miền những ngày cuối tháng 7, miền Bắc bước vào đợt mưa giông dài ngày từ tối nay">
+										<div class="flex-1">
+											<span class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag">Tin tổng hợp</span>
+											<h6 class="font-bold mb-2">
+												<a href="#" class="no-underline text-gray-800 hover:text-blue-600 transition-colors">Tin thời tiết ba miền những ngày cuối tháng 7, miền Bắc bước vào đợt mưa giông dài ngày từ tối nay</a>
+											</h6>
+										</div>
+									</div>
+								</div>
+								<div class="news-item">
+									<div class="flex mb-3">
+										<img src="https://data.thoitiet.vn/weather/2022/7/10/vung-thap.jpg" class="w-32 h-20 object-cover rounded mr-3" alt="Một vùng áp thấp hình thành giữa biển Đông, có khả năng mạnh lên thành áp thấp nhiệt đới!">
+										<div class="flex-1">
+											<span class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag">Tin tổng hợp</span>
+											<h6 class="font-bold mb-2">
+												<a href="#" class="no-underline text-gray-800 hover:text-blue-600 transition-colors">Một vùng áp thấp hình thành giữa biển Đông, có khả năng mạnh lên thành áp thấp nhiệt đới!</a>
+											</h6>
+										</div>
+									</div>
+								</div>
+								<div class="news-item">
+									<div class="flex mb-3">
+										<img src="https://data.thoitiet.vn/weather/2022/7/8/mua-dong.jpg" class="w-32 h-20 object-cover rounded mr-3" alt="Hôm nay mưa dông diễn ra ở nhiều khu vực trên cả nước">
+										<div class="flex-1">
+											<span class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag">Tin tổng hợp</span>
+											<h6 class="font-bold mb-2">
+												<a href="#" class="no-underline text-gray-800 hover:text-blue-600 transition-colors">Hôm nay mưa dông diễn ra ở nhiều khu vực trên cả nước</a>
+											</h6>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<!-- Khám phá thêm section -->
+								<h3 class="text-xl font-bold text-gray-800 mb-4">Khám phá thêm</h3>
+								<div class="flex flex-wrap gap-2">
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-info-circle mr-2"></i>
+									Bản tin thời tiết
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-thermometer-half mr-2"></i>
+									Thiết bị dự báo thời tiết
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-wind mr-2"></i>
+									Máy sưởi
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-thermometer mr-2"></i>
+									Nhiệt kế
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-fan mr-2"></i>
+									Quạt điện
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-cloud-rain mr-2"></i>
+									Dự báo mưa
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-shield-check mr-2"></i>
+									Nón bảo hiểm
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-phone mr-2"></i>
+									Ứng dụng thời tiết
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-droplet mr-2"></i>
+									Lượng mưa
+									</a>
+									<a href="#" class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200">
+									<i class="bi bi-newspaper mr-2"></i>
+									Tin tức thời tiết
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="dia-diem-chi-tiet py-8">
+				<div class="max-w-7xl mx-auto px-4">
+					<div class="bg-white rounded-lg shadow-lg">
+						<div class="p-6">
+							<div class="content-section">
+								<div class="toc-container mb-6">
+									<div class="toc-title-container flex items-center justify-between mb-4">
+										<p class="toc-title text-lg font-semibold text-gray-800 m-0">Nội dung chính</p>
+										<button class="title-toggle px-3 py-1 text-sm border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition-colors">
+											<i class="bi bi-list-nested"></i>
+										</button>
+									</div>
+									<nav class="toc-links">
+										<ul class="ez-toc-list ez-toc-list-level-1 space-y-2">
+											<li class="ez-toc-page-1 ez-toc-heading-level-2">
+												<a class="ez-toc-link ez-toc-heading-1 text-blue-600 hover:text-blue-800 transition-colors" href="#cung-cap-ban-tin-thoi-tiet-hang-ngay" title="Cung cấp bản tin thời tiết hằng ngày">
+													<i class="bi bi-arrow-right-short mr-1"></i>Cung cấp bản tin thời tiết hằng ngày
+												</a>
+											</li>
+											<li class="ez-toc-page-1 ez-toc-heading-level-2">
+												<a class="ez-toc-link ez-toc-heading-1 text-blue-600 hover:text-blue-800 transition-colors" href="#du-bao-thoi-tiet-cap-nhat-theo-gio" title="Dự báo thời tiết cập nhật theo giờ">
+													<i class="bi bi-arrow-right-short mr-1"></i>Dự báo thời tiết cập nhật theo giờ
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+								<div class="html-content prose max-w-none">
+									<p class="text-left">Bạn đang tìm kiếm một công cụ tra cứu thông tin thời tiết hằng ngày tại nơi bạn đang sinh sống?&nbsp; Để xem tin tức cập nhật về thời tiết hôm nay, ngày mai, cũng như khả năng có mưa, nắng nóng, bão, lũ, lốc xoáy... thì đã có trang web thoitiet.vn.<br><br><img class="block mx-auto w-full max-w-2xl h-auto rounded-lg shadow-md" src="https://data.thoitiet.vn/weather/2021/8/7/du-bao-thoi-tiet-hang-ngay-thoitietvn.jpg" alt="Dự báo thời tiết"></p>
+									<h2 id="cung-cap-ban-tin-thoi-tiet-hang-ngay" class="text-2xl font-bold text-gray-800 mt-8 mb-4">Cung cấp bản tin thời tiết hằng ngày</h2>
+									<p class="text-gray-700 leading-relaxed mb-4">Thoitiet.vn là trang web chuyên cung cấp các <strong>bản tin dự báo thời tiết hằng ngày</strong> cho các tỉnh thành, quận huyện và xã phường chính xác và nhanh chóng. Dự báo sớm các dạng thời tiết cực đoan như áp thấp nhiệt đới, hướng đi của bão, tình hình lũ trên các sông,… Giúp người dân dễ dàng nắm bắt và chuẩn bị các kế hoạch ứng phó kịp thời.</p>
+									<p class="text-gray-700 leading-relaxed mb-6">Giao diện thân thiện, trực quan, dễ sử dụng ngay cả với những người mới làm quen với internet.</p>
+									<h2 id="du-bao-thoi-tiet-cap-nhat-theo-gio" class="text-2xl font-bold text-gray-800 mt-8 mb-4">Dự báo thời tiết cập nhật theo giờ</h2>
+									<p class="text-gray-700 leading-relaxed mb-4"><img class="block mx-auto w-full max-w-4xl h-auto rounded-lg shadow-md mb-6" src="https://data.thoitiet.vn/weather/2021/8/7/du-bao-thoi-tiet-thoitietvn1.jpg" alt="thời tiết"><br>Thoitiet.vn còn có thể đưa ra dự báo thời tiết theo từng khung giờ, cho phép bạn nắm bắt được chính xác tình hình thời tiết theo thời gian thực. Bên cạnh đó, còn có dự báo thời tiết ngày mai, dự báo thời tiết 3 ngày hay thời tiết trong 5 ngày tới,… Cho phép bạn chuẩn bị một kế hoạch đi chơi hay công tác ngắn ngày một cách suôn sẻ và thuận lợi.</p>
+									<p class="text-gray-700 leading-relaxed mb-4">Thoitiet.vn cũng có thêm một trang fanpage trên facebook. Cung cấp các bản tin thời tiết tiếp cận tới người xem nhanh nhất.</p>
+									<p class="text-gray-700 leading-relaxed">Hi vọng thoitiet.vn sẽ là người bạn đáng tin cậy của mọi người trong mỗi chuyến công tác hay dự định của mình.</p>
+								</div>
+								<div class="mt-6 text-center">
+									<button id="showMoreContent" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+										<i class="bi bi-chevron-down mr-2"></i>
+										Mở rộng
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600 text-white mt-16">
+			<!-- Main Footer Content -->
+			<div class="max-w-7xl mx-auto px-4 py-12">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<!-- Company Info -->
+					<div class="lg:col-span-2">
+						<div class="mb-6">
+							<img src="./assets/logo-header.png" class="h-12 mb-4 filter brightness-0 invert" alt="ThoiTiet Clone Logo">
+							<h3 class="text-xl font-bold mb-4 text-blue-300">ThoiTiet Clone</h3>
+							<p class="text-gray-300 leading-relaxed mb-4">
+								Trang web cung cấp thông tin dự báo thời tiết chính xác và đáng tin cậy cho toàn bộ lãnh thổ Việt Nam. 
+								Cập nhật 24/7 với dữ liệu từ các trạm khí tượng uy tín.
+							</p>
+						</div>
+						
+						<!-- Contact Info -->
+						<div class="space-y-3">
+							<div class="flex items-center">
+								<i class="bi bi-envelope-fill text-blue-400 mr-3 text-lg"></i>
+								<a href="mailto:contact@thoitietclone.vn" class="text-gray-300 hover:text-blue-300 transition-colors">
+									contact@thoitietclone.vn
+								</a>
+							</div>
+							<div class="flex items-center">
+								<i class="bi bi-telephone-fill text-blue-400 mr-3 text-lg"></i>
+								<span class="text-gray-300">1900 1234 (24/7)</span>
+							</div>
+							<div class="flex items-center">
+								<i class="bi bi-geo-alt-fill text-blue-400 mr-3 text-lg"></i>
+								<span class="text-gray-300">Hà Nội, Việt Nam</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- Quick Links -->
+					<div>
+						<h4 class="text-lg font-semibold mb-6 text-blue-300">Liên kết nhanh</h4>
+						<ul class="space-y-3">
+							<li>
+								<a href="/" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-house-door mr-2"></i>Trang chủ
+								</a>
+							</li>
+							<li>
+								<a href="/du-bao-7-ngay" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-calendar-week mr-2"></i>Dự báo 7 ngày
+								</a>
+							</li>
+							<li>
+								<a href="/ban-do-thoi-tiet" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-map mr-2"></i>Bản đồ thời tiết
+								</a>
+							</li>
+							<li>
+								<a href="/tin-tuc" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-newspaper mr-2"></i>Tin tức thời tiết
+								</a>
+							</li>
+							<li>
+								<a href="/api" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-code-slash mr-2"></i>API
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Legal & Support -->
+					<div>
+						<h4 class="text-lg font-semibold mb-6 text-blue-300">Hỗ trợ & Pháp lý</h4>
+						<ul class="space-y-3">
+							<li>
+								<a href="/gioi-thieu" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-info-circle mr-2"></i>Giới thiệu
+								</a>
+							</li>
+							<li>
+								<a href="/lien-he" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-envelope mr-2"></i>Liên hệ
+								</a>
+							</li>
+							<li>
+								<a href="/dieu-khoan-su-dung" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-file-text mr-2"></i>Điều khoản sử dụng
+								</a>
+							</li>
+							<li>
+								<a href="/chinh-sach-rieng-tu" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-shield-check mr-2"></i>Chính sách riêng tư
+								</a>
+							</li>
+							<li>
+								<a href="/huong-dan" class="text-gray-300 hover:text-blue-300 transition-colors flex items-center">
+									<i class="bi bi-question-circle mr-2"></i>Hướng dẫn sử dụng
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Social Media & Bottom Bar -->
+			<div class="border-t border-slate-600">
+				<div class="max-w-7xl mx-auto px-4 py-6">
+					<div class="flex flex-col md:flex-row justify-between items-center">
+						<!-- Social Media -->
+						<div class="mb-4 md:mb-0">
+							<p class="text-sm text-gray-400 mb-3 md:mb-0 text-center md:text-left">Theo dõi chúng tôi:</p>
+							<div class="flex justify-center md:justify-start space-x-3">
+								<a href="#" class="social-link bg-blue-600 hover:bg-blue-700" rel="nofollow" target="_blank" title="Facebook">
+									<i class="bi bi-facebook"></i>
+								</a>
+								<a href="#" class="social-link bg-sky-500 hover:bg-sky-600" rel="nofollow" target="_blank" title="Twitter">
+									<i class="bi bi-twitter-x"></i>
+								</a>
+								<a href="#" class="social-link bg-pink-600 hover:bg-pink-700" rel="nofollow" target="_blank" title="Instagram">
+									<i class="bi bi-instagram"></i>
+								</a>
+								<a href="#" class="social-link bg-red-600 hover:bg-red-700" rel="nofollow" target="_blank" title="YouTube">
+									<i class="bi bi-youtube"></i>
+								</a>
+								<a href="#" class="social-link bg-blue-700 hover:bg-blue-800" rel="nofollow" target="_blank" title="LinkedIn">
+									<i class="bi bi-linkedin"></i>
+								</a>
+							</div>
+						</div>
+
+						<!-- Copyright -->
+						<div class="text-center md:text-right">
+							<p class="text-sm text-gray-400">
+								© 2025 <span class="text-blue-300 font-semibold">ThoiTiet Clone</span>. 
+								Tất cả quyền được bảo lưu.
+							</p>
+							<p class="text-xs text-gray-500 mt-1">
+								Được phát triển bởi Ecomkey ❤️
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="/lib/jquery/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" crossorigin="anonymous"></script>
+		<script src="/js/bootstrap-autocomplete.min.js"></script>
+		<div class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" id="requestLocalModal">
+			<div class="flex items-center justify-center min-h-screen p-4">
+				<div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+					<div class="flex items-center justify-between p-4 border-b">
+						<h5 class="text-lg font-semibold">Modal title</h5>
+						<button type="button" class="text-gray-400 hover:text-gray-600" onclick="closeModal()">
+						<span class="text-2xl">&times;</span>
+						</button>
+					</div>
+					<div class="p-4">
+						<p>Website cần biết địa điểm của bạn để gợi ý thông tin dự báo thời tiết được chính xác.</p>
+					</div>
+					<div class="flex justify-end space-x-2 p-4 border-t">
+						<button type="button" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors" onclick="closeModal()">Từ chối</button>
+						<button type="button" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors" onclick="getLocation()">Đồng ý</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/js/site.js?v=-x9aILkIPryywVnKibGxdP2AziyXdL53OxrXysZHi_w"></script>
+		<script src="/js/geo.js?v=cvH2dB9EJjIquKHZG_1_XAheDeVwvIrjPbeW2Hj5Ywc"></script>
+		<script>
+			// Navbar toggle functionality
+			function toggleNavbar() {
+				const navbarCollapse = document.getElementById('navbarCollapse');
+				if (navbarCollapse.classList.contains('hidden')) {
+					navbarCollapse.classList.remove('hidden');
+					navbarCollapse.classList.add('flex');
+				} else {
+					navbarCollapse.classList.add('hidden');
+					navbarCollapse.classList.remove('flex');
+				}
+			}
+			
+			// Dropdown toggle functionality
+			function toggleDropdown(event) {
+				event.preventDefault();
+				const megaMenu = document.getElementById('megaMenu');
+				if (megaMenu.classList.contains('opacity-0')) {
+					megaMenu.classList.remove('opacity-0', 'invisible');
+					megaMenu.classList.add('opacity-100', 'visible');
+				} else {
+					megaMenu.classList.add('opacity-0', 'invisible');
+					megaMenu.classList.remove('opacity-100', 'visible');
+				}
+			}
+			
+			// Modal functions
+			function openModal() {
+				document.getElementById('requestLocalModal').classList.remove('hidden');
+			}
+			
+			function closeModal() {
+				document.getElementById('requestLocalModal').classList.add('hidden');
+			}
+			
+			// Close dropdown when clicking outside
+			document.addEventListener('click', function(event) {
+				const megaMenu = document.getElementById('megaMenu');
+				const dropdownToggle = event.target.closest('[onclick="toggleDropdown(event)"]');
+				
+				if (!dropdownToggle && !megaMenu.contains(event.target)) {
+					megaMenu.classList.add('opacity-0', 'invisible');
+					megaMenu.classList.remove('opacity-100', 'visible');
+				}
+			});
+		</script>
+		<!-- Global site tag (gtag.js) - Google Analytics VuongTest -->
+		<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KVHV391KVM"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			
+			gtag('config', 'G-KVHV391KVM');
+		</script>
+	</body>
+</html>
