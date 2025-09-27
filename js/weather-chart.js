@@ -30,13 +30,20 @@ function initWeatherChart() {
         datasets: [
             {
                 label: 'Nhiệt độ',
-                type: 'bar',
+                type: 'line',
                 data: [24.3, 24.9, 23.5, 23.5, 23.2, 23.3, 23.7, 23.6, 23.8, 23, 23.3, 23.8],
-                backgroundColor: 'rgba(59, 130, 246, 0.7)', // Blue bars
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
                 borderColor: 'rgba(59, 130, 246, 1)',
-                borderWidth: 1,
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 5,
+                tension: 0.35,
+                fill: false,
+                spanGaps: true,
                 yAxisID: 'y',
-                barThickness: 40,
             },
             {
                 label: 'Khả năng có mưa',
@@ -67,7 +74,6 @@ function initWeatherChart() {
                     align: 'start',
                     labels: {
                         usePointStyle: true,
-                        pointStyle: 'rect',
                         font: {
                             size: 12,
                             family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
@@ -165,16 +171,18 @@ function initWeatherChart() {
                             ctx.fillStyle = '#1f2937';
                             ctx.font = 'bold 11px "Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
                             ctx.textAlign = 'center';
-                            ctx.textBaseline = 'bottom';
 
                             const dataString = dataset.data[index].toString();
                             const suffix = i === 0 ? '°' : '%';
-                            
-                            // Position text above the bar
+                            const isLineDataset = (dataset.type || meta.type) === 'line';
+
+                            ctx.textBaseline = isLineDataset ? 'bottom' : 'bottom';
+                            const yOffset = isLineDataset ? 10 : 5;
+
                             ctx.fillText(
                                 dataString + suffix,
                                 element.x,
-                                element.y - 5
+                                element.y - yOffset
                             );
                         });
                     }
