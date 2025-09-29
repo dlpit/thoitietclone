@@ -15,10 +15,20 @@ document.addEventListener('alpine:init', () => {
 
         init() {
             this.applyConfig(config);
+            this.updateVisibleCards(); // Set initial visible cards based on screen size
             this.startAutoPlay();
 
             this.$watch('totalCards', () => this.ensureIndexInRange());
             this.$watch('visibleCards', () => this.ensureIndexInRange());
+            
+            // Listen for window resize to adjust visible cards
+            window.addEventListener('resize', () => this.updateVisibleCards());
+        },
+        
+        updateVisibleCards() {
+            // Mobile: 2 cards, Desktop: 4 cards
+            this.visibleCards = window.innerWidth <= 768 ? 2 : 4;
+            this.ensureIndexInRange();
         },
 
         applyConfig(configOverrides = {}) {

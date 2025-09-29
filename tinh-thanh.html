@@ -83,6 +83,20 @@
           @apply shadow-2xl;
           box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
         }
+        
+        /* Responsive Weather Cards */
+        .weather-carousel-card {
+          width: 25%; /* Default: 4 cards */
+          flex-shrink: 0;
+          padding: 0 8px;
+          box-sizing: border-box;
+        }
+        
+        @media (max-width: 768px) {
+          .weather-carousel-card {
+            width: 50%; /* Mobile: 2 cards */
+          }
+        }
         .current-weather {
           @apply text-white rounded-3xl p-8 border border-white/20;
           background: rgba(255, 255, 255, 0.15);
@@ -290,19 +304,80 @@
         }
         /* Air Quality Indicators */
         .air-rules {
-          @apply flex gap-0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          justify-content: center;
         }
+        
+        @media (min-width: 640px) {
+          .air-rules {
+            flex-wrap: nowrap;
+            gap: 0;
+            justify-content: flex-start;
+          }
+        }
+        
         .air-api {
-          @apply px-4 py-2 text-xs font-medium text-white border-0 transition-all duration-300 cursor-pointer;
-          min-width: 80px;
+          padding: 8px 12px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: white;
+          border: 0;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          min-width: 50px;
           text-align: center;
+          flex: 1;
+          max-width: 80px;
+          border-radius: 9999px;
+          margin-bottom: 4px;
         }
-        .air-api:first-child {
-          @apply rounded-l-full;
+        
+        @media (max-width: 640px) {
+          .air-api {
+            min-width: 45px;
+            font-size: 10px;
+            padding: 6px 8px;
+            max-width: 70px;
+          }
+          
+          .air-active {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.3);
+            transform: scale(1.15);
+            font-weight: 700;
+            z-index: 10;
+            position: relative;
+          }
         }
-        .air-api:last-child {
-          @apply rounded-r-full;
+        
+        @media (min-width: 641px) {
+          .air-api {
+            border-radius: 0;
+            margin-bottom: 0;
+            max-width: 100px;
+            padding: 8px 16px;
+          }
+          
+          .air-api:first-child {
+            border-top-left-radius: 9999px;
+            border-bottom-left-radius: 9999px;
+          }
+          
+          .air-api:last-child {
+            border-top-right-radius: 9999px;
+            border-bottom-right-radius: 9999px;
+          }
+          
+          .air-active {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.4);
+            transform: scale(1.3);
+            font-weight: 700;
+            z-index: 10;
+            position: relative;
+          }
         }
+        
         .air-api-1 {
           background-color: #22c55e;
         }
@@ -318,9 +393,6 @@
         }
         .air-api-5 {
           background-color: #991b1b;
-        }
-        .air-active {
-          @apply shadow-lg transform scale-125;
         }
         .news-category-tag {
           background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
@@ -1699,7 +1771,7 @@
                   </div>
                 </div>
                 <div
-                  class="flex flex-wrap justify-between weather-detail-2 mt-2"
+                  class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 weather-detail-2 mt-2"
                 >
                   <div class="flex items-center">
                     <div class="avatar">
@@ -1707,9 +1779,9 @@
                         <i data-lucide="thermometer"></i>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-bold mb-1">Thấp/Cao</span>
-                      <div class="flex ml-auto items-center">
+                    <div class="flex-1 ml-3">
+                      <span class="font-bold mb-1 block">Thấp/Cao</span>
+                      <div class="flex items-center">
                         <span class="text-white opacity-80 font-bold"
                           >22.1°/27.4°</span
                         >
@@ -1722,9 +1794,9 @@
                         <i data-lucide="droplets"></i>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-bold mb-1">Độ ẩm</span>
-                      <div class="flex ml-auto items-center">
+                    <div class="flex-1 ml-3">
+                      <span class="font-bold mb-1 block">Độ ẩm</span>
+                      <div class="flex items-center">
                         <span class="text-white opacity-80 font-bold">98%</span>
                       </div>
                     </div>
@@ -1735,9 +1807,9 @@
                         <i data-lucide="eye"></i>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-bold mb-1">Tầm nhìn</span>
-                      <div class="flex ml-auto items-center">
+                    <div class="flex-1 ml-3">
+                      <span class="font-bold mb-1 block">Tầm nhìn</span>
+                      <div class="flex items-center">
                         <span class="text-white opacity-80 font-bold"
                           >10 km</span
                         >
@@ -1750,9 +1822,9 @@
                         <i data-lucide="wind"></i>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-bold mb-1">Gió</span>
-                      <div class="flex ml-auto items-center">
+                    <div class="flex-1 ml-3">
+                      <span class="font-bold mb-1 block">Gió</span>
+                      <div class="flex items-center">
                         <span class="text-white opacity-80 font-bold"
                           >2.07 km/giờ</span
                         >
@@ -1765,9 +1837,9 @@
                         <i data-lucide="droplet"></i>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-bold mb-1">Điểm ngưng</span>
-                      <div class="flex ml-auto items-center">
+                    <div class="flex-1 ml-3">
+                      <span class="font-bold mb-1 block">Điểm ngưng</span>
+                      <div class="flex items-center">
                         <span class="text-white opacity-80 font-bold"
                           >23.9 °C</span
                         >
@@ -1780,9 +1852,9 @@
                         <i data-lucide="sun"></i>
                       </div>
                     </div>
-                    <div class="flex-1">
-                      <span class="font-bold mb-1">Chỉ số UV</span>
-                      <div class="flex ml-auto items-center">
+                    <div class="flex-1 ml-3">
+                      <span class="font-bold mb-1 block">Chỉ số UV</span>
+                      <div class="flex items-center">
                         <span class="text-white opacity-80 font-bold"
                           >1.13</span
                         >
@@ -2159,39 +2231,39 @@
                       Chất lượng không khí: Khá
                     </h2>
                   </div>
-                  <!-- Air Quality Level Indicators -->
-                  <div class="air-rules mb-4">
-                    <p
-                      class="air-api air-api-1"
-                      title="Chất lượng không khí đạt tiêu chuẩn, và ô nhiễm không khí coi như không hoặc gây rất ít nguy hiểm"
-                    >
-                      Tốt
-                    </p>
-                    <p
-                      class="air-api air-api-2 air-active"
-                      title="Chất lượng không khí ở mức chấp nhận được. Tuy nhiên, một số chất gây ô nhiễm có thể ảnh hưởng tới sức khỏe của một số ít những người nhạy cảm với không khí bị ô nhiễm"
-                    >
-                      Khá
-                    </p>
-                    <p
-                      class="air-api air-api-3"
-                      title="Không tốt cho người nhạy cảm. Nhóm người nhạy cảm có thể chịu ảnh hưởng sức khỏe. Số đông không có nguy cơ bị tác động."
-                    >
-                      Trung bình
-                    </p>
-                    <p
-                      class="air-api air-api-4"
-                      title="Có hại cho sức khỏe với đa số người. Mỗi người đều có thể sẽ chịu tác động đến sức khỏe. Nhóm người nhạy cảm có thể bị ảnh hưởng nghiêm trọng hơn."
-                    >
-                      Kém
-                    </p>
-                    <p
-                      class="air-api air-api-5"
-                      title="Rất có hại cho sức khỏe. Cảnh báo nguy hại sức khỏe nghiêm trọng. Đa số mọi người đều bị ảnh hưởng."
-                    >
-                      Rất kém
-                    </p>
-                  </div>
+                    <!-- Air Quality Level Indicators -->
+                    <div class="air-rules mb-4">
+                      <p
+                        class="air-api air-api-1"
+                        title="Chất lượng không khí đạt tiêu chuẩn, và ô nhiễm không khí coi như không hoặc gây rất ít nguy hiểm"
+                      >
+                        Tốt
+                      </p>
+                      <p
+                        class="air-api air-api-2 air-active"
+                        title="Chất lượng không khí ở mức chấp nhận được. Tuy nhiên, một số chất gây ô nhiễm có thể ảnh hưởng tới sức khỏe của một số ít những người nhạy cảm với không khí bị ô nhiễm"
+                      >
+                        Khá
+                      </p>
+                      <p
+                        class="air-api air-api-3"
+                        title="Không tốt cho người nhạy cảm. Nhóm người nhạy cảm có thể chịu ảnh hưởng sức khỏe. Số đông không có nguy cơ bị tác động."
+                      >
+                        Trung bình
+                      </p>
+                      <p
+                        class="air-api air-api-4"
+                        title="Có hại cho sức khỏe với đa số người. Mỗi người đều có thể sẽ chịu tác động đến sức khỏe. Nhóm người nhạy cảm có thể bị ảnh hưởng nghiêm trọng hơn."
+                      >
+                        Kém
+                      </p>
+                      <p
+                        class="air-api air-api-5"
+                        title="Rất có hại cho sức khỏe. Cảnh báo nguy hại sức khỏe nghiêm trọng. Đa số mọi người đều bị ảnh hưởng."
+                      >
+                        Rất kém
+                      </p>
+                    </div>
                 </div>
                 <!-- Air Quality Components -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -2280,7 +2352,7 @@
                 <!-- Carousel Container -->
                 <div
                   class="relative w-full max-w-[700px] mx-auto"
-                  x-data="weatherCarousel({ totalCards: 6, visibleCards: 4, autoPlay: true })"
+                  x-data="weatherCarousel({ totalCards: 6, autoPlay: true })"
                 >
                   <!-- Carousel Content -->
                   <div class="overflow-hidden">
@@ -2289,7 +2361,7 @@
                       :style="{ transform: getTranslateX() }"
                     >
                       <!-- Card 1 - 16:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2329,7 +2401,7 @@
                       </div>
 
                       <!-- Card 2 - Hiện tại -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/10 border border-white/20 text-center"
                         >
@@ -2371,7 +2443,7 @@
                       </div>
 
                       <!-- Card 3 - 18:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2411,7 +2483,7 @@
                       </div>
 
                       <!-- Card 4 - 19:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2451,7 +2523,7 @@
                       </div>
 
                       <!-- Card 5 - 20:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2491,7 +2563,7 @@
                       </div>
 
                       <!-- Card 6 - 21:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2621,7 +2693,7 @@
                 <!-- Carousel Container -->
                 <div
                   class="relative w-full max-w-[700px] mx-auto"
-                  x-data="weatherCarousel({ totalCards: 6, visibleCards: 4, autoPlay: true })"
+                  x-data="weatherCarousel({ totalCards: 6, autoPlay: true })"
                 >
                   <!-- Carousel Content -->
                   <div class="overflow-hidden">
@@ -2630,7 +2702,7 @@
                       :style="{ transform: getTranslateX() }"
                     >
                       <!-- Card 1 - 16:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2670,7 +2742,7 @@
                       </div>
 
                       <!-- Card 2 - Hiện tại -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/10 border border-white/20 text-center"
                         >
@@ -2712,7 +2784,7 @@
                       </div>
 
                       <!-- Card 3 - 18:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2752,7 +2824,7 @@
                       </div>
 
                       <!-- Card 4 - 19:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2792,7 +2864,7 @@
                       </div>
 
                       <!-- Card 5 - 20:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
@@ -2832,7 +2904,7 @@
                       </div>
 
                       <!-- Card 6 - 21:00 -->
-                      <div class="w-1/4 flex-shrink-0 px-2 box-border">
+                      <div class="weather-carousel-card">
                         <div
                           class="weather-card p-4 rounded-xl bg-white/5 border border-white/10 text-center"
                         >
