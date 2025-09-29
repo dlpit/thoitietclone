@@ -1985,1277 +1985,534 @@
 					<div class="flex flex-wrap lg:flex-nowrap gap-6 pb-8 text-white">
 						<!-- Left Content -->
 						<div class="w-full lg:w-2/3 order-2 lg:order-1">
-							<!-- List lượng mưa -->
+							<!-- Dự báo thời tiết tỉnh thành x ngày tới -->
 							<div class="card card-list-weather">
 								<div class="card-header header-thoi-tiet-ngay">
 									<h1 class="card-title">
 										<a href="/luong-mua">
-										Lượng mưa cả nước hôm nay
+										Dự báo thời tiết Hà Nội 3 ngày tới
 										</a>
 									</h1>
 									<div class="share-button">
 										<div class="fb-like" data-href="https://thoitiet.vn/luong-mua" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
 									</div>
 								</div>
-								<div class="card-body">
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-noi/luong-mua">
-												Hà Nội
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												99.6 mm
-											</p>
+								<div class="card-body pb-0 pt-0" x-data="weatherDaysComponent()">
+									<div class="weather-day" data-day="0" id="weather-day-0">
+										<div class="weather-summary cursor-pointer" @click="toggleDay(0)">
+											<div class="weather-summary-content">
+												<div class="weather-summary-title">
+													<h2 class="summary-day">
+														<span>Hôm nay</span>
+													</h2>
+													<div class="summary-temperature">
+														<span class="summary-temperature-min">
+														25.5°C
+														</span>
+														<span class="summary-temperature-max">
+														/
+														<span class="summary-temperature-max-value">
+														27.9°C
+														</span>
+														</span>
+													</div>
+													<div class="summary-description">
+														<img src="https://data.thoitiet.vn/weather/icons/10d.png" alt="Mưa rất nặng" class="summary-img">
+														<span class="summary-description-detail">
+														Mưa rất nặng
+														</span>
+													</div>
+													<div class="summary-humidity cursor-pointer" @click.stop="toggleDay(0)">
+														<span class="summary-icon">
+														<i data-lucide="droplet" class="w-4 h-4"></i>
+														</span>
+														<span>
+														92%
+														</span>
+													</div>
+													<div class="summary-speed">
+														<span class="summary-icon">
+															<i data-lucide="wind" class="w-4 h-4"></i>
+														</span>
+														<span>
+														11.61 km/giờ
+														</span>
+													</div>
+												</div>
+												<span class="weather-summary-toggle">
+												<i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': isDayOpen(0) }"></i>
+												</span>
+											</div>
 										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hương Sơn
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-giang/luong-mua">
-												Hà Giang
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												6.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đồng Tâm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-kan/luong-mua">
-												Bắc Kạn
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												28.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Bộc Bố 2
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thanh-pho-hue/luong-mua">
-												Thành phố Huế
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												28.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Điền Hương (Phong Điền)
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tuyen-quang/luong-mua">
-												Tuyên Quang
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												43.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đồng Quý
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lao-cai/luong-mua">
-												Lào Cai
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												159.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Làng Nhì
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dien-bien/luong-mua">
-												Điện Biên
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												17.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Mường Nhé
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lai-chau/luong-mua">
-												Lai Châu
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												21.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Phu Nậm Sap
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="son-la/luong-mua">
-												Sơn La
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												121 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Km46
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="yen-bai/luong-mua">
-												Yên Bái
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												17 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Minh Tiến
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hoa-binh/luong-mua">
-												Hòa Bình
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Vĩnh Đồng
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thai-nguyen/luong-mua">
-												Thái Nguyên
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												29.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đức Vân
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lang-son/luong-mua">
-												Lạng Sơn
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												31.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Chi Lăng
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
+										
+										<!-- Weather Details Dropdown -->
+										<div x-show="isDayOpen(0)" 
+											 x-transition:enter="transition ease-out duration-300"
+											 x-transition:enter-start="opacity-0 -translate-y-2"
+											 x-transition:enter-end="opacity-100 translate-y-0"
+											 x-transition:leave="transition ease-in duration-200"
+											 x-transition:leave-start="opacity-100 translate-y-0"
+											 x-transition:leave-end="opacity-0 -translate-y-2"
+											 class="weather-content mt-2">
+											<div class="weather-detail weather-detail-cac-ngay">
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="thermometer" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Ngày/Đêm</h6>
+														<div class="flex ml-auto items-center">
+															<span class="opacity-80 font-bold">
+																25.3/
+																<span>25°</span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="thermometer" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Sáng/Tối</h6>
+														<div class="flex ml-auto items-center">
+															<span class="opacity-80 font-bold">
+																25.4/
+																<span>27.3°</span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="gauge" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Áp suất</h6>
+														<div class="flex ml-auto items-center">
+															<h3 class="opacity-80 font-bold">1006 mb</h3>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="wind" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Gió</h6>
+														<div class="flex ml-auto items-center">
+															<h3 class="opacity-80 font-bold">11.61 km/giờ</h3>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item-sun">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="sun" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Mặt trời mọc/lặn</h6>
+														<div class="flex ml-auto items-center">
+															<div class="weather-sun">
+																<span><i data-lucide="sunrise" class="w-4 h-4 text-gray-600"></i>05:46</span>
+																<span>
+																	<i data-lucide="sunset" class="w-4 h-4 text-gray-600"></i>
+																	17:46
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<!-- Chi tiết theo giờ -->
+											<div class="separator-dashed m-0"></div>
+											<div class="weather-summary p-0">
+												<div class="weather-summary-content">
+													<div class="weather-summary-title">
+														<h2 class="summary-day">
+															16:00
+														</h2>
+														<div class="summary-temperature">
+															<span class="summary-temperature-min">
+																26.2°C
+															</span>
+															<span class="summary-temperature-max">
+																/
+																<span class="summary-temperature-max-value">
+																	27.1°C
+																</span>
+															</span>
+														</div>
+														<div class="summary-description">
+															<img src="https://data.thoitiet.vn/weather/icons/10d.png" alt="Mưa cường độ nặng" class="summary-img">
+															<span class="summary-description-detail">
+																Mưa nhẹ
+															</span>
+														</div>
+														<div class="summary-humidity">
+															<span class="summary-icon">
+																<i data-lucide="droplet" class="w-4 h-4"></i>
+															</span>
+															<span>
+																91%
+															</span>
+														</div>
+														<div class="summary-speed">
+															<span class="summary-icon">
+																<i data-lucide="wind" class="w-4 h-4"></i>
+															</span>
+															<span>
+																7.02 km/giờ
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="separator-dashed m-0"></div>
+											<div class="weather-summary p-0">
+												<div class="weather-summary-content">
+													<div class="weather-summary-title">
+														<h2 class="summary-day">
+															19:00
+														</h2>
+														<div class="summary-temperature">
+															<span class="summary-temperature-min">
+																25.7°C
+															</span>
+															<span class="summary-temperature-max">
+																/
+																<span class="summary-temperature-max-value">
+																	26.6°C
+																</span>
+															</span>
+														</div>
+														<div class="summary-description">
+															<img src="https://data.thoitiet.vn/weather/icons/10n.png" alt="Mưa vừa" class="summary-img">
+															<span class="summary-description-detail">
+																Mưa vừa
+															</span>
+														</div>
+														<div class="summary-humidity">
+															<span class="summary-icon">
+																<i data-lucide="droplet" class="w-4 h-4"></i>
+															</span>
+															<span>
+																91%
+															</span>
+														</div>
+														<div class="summary-speed">
+															<span class="summary-icon">
+																<i data-lucide="wind" class="w-4 h-4"></i>
+															</span>
+															<span>
+																5.6 km/giờ
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="separator-dashed m-0"></div>
+											<div class="weather-summary p-0">
+												<div class="weather-summary-content">
+													<div class="weather-summary-title">
+														<h2 class="summary-day">
+															22:00
+														</h2>
+														<div class="summary-temperature">
+															<span class="summary-temperature-min">
+																25.9°C
+															</span>
+															<span class="summary-temperature-max">
+																/
+																<span class="summary-temperature-max-value">
+																	26.6°C
+																</span>
+															</span>
+														</div>
+														<div class="summary-description">
+															<img src="https://data.thoitiet.vn/weather/icons/10n.png" alt="Mưa vừa" class="summary-img">
+															<span class="summary-description-detail">
+																Mưa vừa
+															</span>
+														</div>
+														<div class="summary-humidity">
+															<span class="summary-icon">
+																<i data-lucide="droplet" class="w-4 h-4"></i>
+															</span>
+															<span>
+																92%
+															</span>
+														</div>
+														<div class="summary-speed">
+															<span class="summary-icon">
+																<i data-lucide="wind" class="w-4 h-4"></i>
+															</span>
+															<span>
+																6.06 km/giờ
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-ninh/luong-mua">
-												Quảng Ninh
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												148.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Kỳ Thượng
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-giang/luong-mua">
-												Bắc Giang
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												41.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Khuôn Thần
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="phu-tho/luong-mua">
-												Phú Thọ
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												186.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hồ Cạn Thượng
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="vinh-phuc/luong-mua">
-												Vĩnh Phúc
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												18.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Lập Thạch
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-ninh/luong-mua">
-												Bắc Ninh
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												46.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đèo Hạ My
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hai-duong/luong-mua">
-												Hải Dương
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Bến Tắm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hai-phong/luong-mua">
-												Hải Phòng
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												20.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Cổ ngựa
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hung-yen/luong-mua">
-												Hưng Yên
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												48 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đa Cốc
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thai-binh/luong-mua">
-												Thái Bình
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Thụy Trường
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-nam/luong-mua">
-												Hà Nam
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hòa Mạc
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="nam-dinh/luong-mua">
-												Nam Định
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hải Đường
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ninh-binh/luong-mua">
-												Ninh Bình
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												187.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Yên Đồng
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thanh-hoa/luong-mua">
-												Thanh Hóa
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												357.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Xuân Bình
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="nghe-an/luong-mua">
-												Nghệ An
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												338.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Mỹ Sơn 1
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-tinh/luong-mua">
-												Hà Tĩnh
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												318.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hồ Mạc Khê
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-binh/luong-mua">
-												Quảng Bình
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												5.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Quảng Tiên
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-tri/luong-mua">
-												Quảng Trị
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												179.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hồ Vực Tròn
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thua-thien-hue/luong-mua">
-												Thừa Thiên Huế
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												1.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đỉnh Bạch Mã (Phú Lộc)
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="da-nang/luong-mua">
-												Đà Nẵng
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												17.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Nhà máy Thủy điện A Vương
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-nam/luong-mua">
-												Quảng Nam
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												0.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Ch'ơm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-ngai/luong-mua">
-												Quảng Ngãi
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												54.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Rờ Kơi
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-dinh/luong-mua">
-												Bình Định
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Chi cục Thủy lợi
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="phu-yen/luong-mua">
-												Phú Yên
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hòa Tâm
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="khanh-hoa/luong-mua">
-												Khánh Hòa
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Sơn Lâm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ninh-thuan/luong-mua">
-												Ninh Thuận
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Vĩnh Hải
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-thuan/luong-mua">
-												Bình Thuận
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												16.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đa Mi
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="kon-tum/luong-mua">
-												Kon Tum
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												8.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Sa Thầy
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="gia-lai/luong-mua">
-												Gia Lai
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												40.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Thủy điện Sê San 3A
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dak-lak/luong-mua">
-												Đắk Lắk
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												2.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Yang Mao 5
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dak-nong/luong-mua">
-												Đắk Nông
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đăk Ha, Đăk G'Long
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lam-dong/luong-mua">
-												Lâm Đồng
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												33.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hưng Bình, Đăk R'lấp
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-phuoc/luong-mua">
-												Bình Phước
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												4.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Minh Lập
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tay-ninh/luong-mua">
-												Tây Ninh
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												22.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hòa Thạnh
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-duong/luong-mua">
-												Bình Dương
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Sở Sao
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dong-nai/luong-mua">
-												Đồng Nai
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												16.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Lộc Thạnh
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ba-ria-vung-tau/luong-mua">
-												Bà Rịa - Vũng Tàu
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												10.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Côn Đảo
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ho-chi-minh/luong-mua">
-												TP Hồ Chí Minh
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												9.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Bình Chánh
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="long-an/luong-mua">
-												Long An
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Tân Trụ
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tien-giang/luong-mua">
-												Tiền Giang
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Cống Rạch Mương
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ben-tre/luong-mua">
-												Bến Tre
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												0.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Phú Khánh
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tra-vinh/luong-mua">
-												Trà Vinh
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Trà Cú
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="vinh-long/luong-mua">
-												Vĩnh Long
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Trà Cú
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dong-thap/luong-mua">
-												Đồng Tháp
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												8.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Phú Mỹ
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="an-giang/luong-mua">
-												An Giang
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												44.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Nhơn Hội
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="kien-giang/luong-mua">
-												Kiên Giang
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												5.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Vĩnh Thuận
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="can-tho/luong-mua">
-												Cần Thơ
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												23.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hỏa Tiến
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hau-giang/luong-mua">
-												Hậu Giang
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												1.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đông Phước A
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="soc-trang/luong-mua">
-												Sóc Trăng
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Kế Sách
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-lieu/luong-mua">
-												Bạc Liêu
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												12.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Ngan Dừa
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ca-mau/luong-mua">
-												Cà Mau
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												39.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Thới Bình
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
+
+									<div class="weather-day" data-day="1" id="weather-day-1">
+										<div class="weather-summary cursor-pointer" @click="toggleDay(1)">
+											<div class="weather-summary-content">
+												<div class="weather-summary-title">
+													<h2 class="summary-day">
+														<span>Mai</span>
+													</h2>
+													<div class="summary-temperature">
+														<span class="summary-temperature-min">
+														24.8°C
+														</span>
+														<span class="summary-temperature-max">
+														/
+														<span class="summary-temperature-max-value">
+														28.2°C
+														</span>
+														</span>
+													</div>
+													<div class="summary-description">
+														<img src="https://data.thoitiet.vn/weather/icons/09d.png" alt="Mưa nhẹ" class="summary-img">
+														<span class="summary-description-detail">
+														Mưa nhẹ
+														</span>
+													</div>
+													<div class="summary-humidity cursor-pointer" @click.stop="toggleDay(1)">
+														<span class="summary-icon">
+														<i data-lucide="droplet" class="w-4 h-4"></i>
+														</span>
+														<span>
+														88%
+														</span>
+													</div>
+													<div class="summary-speed">
+														<span class="summary-icon">
+															<i data-lucide="wind" class="w-4 h-4"></i>
+														</span>
+														<span>
+														8.4 km/giờ
+														</span>
+													</div>
+												</div>
+												<span class="weather-summary-toggle">
+												<i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': isDayOpen(1) }"></i>
+												</span>
+											</div>
+										</div>
+										
+										<!-- Weather Details Dropdown -->
+										<div x-show="isDayOpen(1)" 
+											 x-transition:enter="transition ease-out duration-300"
+											 x-transition:enter-start="opacity-0 -translate-y-2"
+											 x-transition:enter-end="opacity-100 translate-y-0"
+											 x-transition:leave="transition ease-in duration-200"
+											 x-transition:leave-start="opacity-100 translate-y-0"
+											 x-transition:leave-end="opacity-0 -translate-y-2"
+											 class="weather-content mt-2">
+											<div class="weather-detail weather-detail-cac-ngay">
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="thermometer" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Ngày/Đêm</h6>
+														<div class="flex ml-auto items-center">
+															<span class="opacity-80 font-bold">
+																25.3/
+																<span>25°</span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="thermometer" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Sáng/Tối</h6>
+														<div class="flex ml-auto items-center">
+															<span class="opacity-80 font-bold">
+																25.4/
+																<span>27.3°</span>
+															</span>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="gauge" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Áp suất</h6>
+														<div class="flex ml-auto items-center">
+															<h3 class="opacity-80 font-bold">1006 mb</h3>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="wind" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Gió</h6>
+														<div class="flex ml-auto items-center">
+															<h3 class="opacity-80 font-bold">11.61 km/giờ</h3>
+														</div>
+													</div>
+												</div>
+												<div class="flex weather-content-item-sun">
+													<div class="flex items-center justify-center w-9 h-12 flex-shrink-0">
+														<i data-lucide="sun" class="w-4 h-4 text-gray-600"></i>
+													</div>
+													<div class="flex-1 pt-1">
+														<h6 class="font-bold mb-1">Mặt trời mọc/lặn</h6>
+														<div class="flex ml-auto items-center">
+															<div class="weather-sun">
+																<span><i data-lucide="sunrise" class="w-4 h-4 text-gray-600"></i>05:46</span>
+																<span>
+																	<i data-lucide="sunset" class="w-4 h-4 text-gray-600"></i>
+																	17:46
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<!-- Chi tiết theo giờ -->
+											<div class="separator-dashed m-0"></div>
+											<div class="weather-summary p-0">
+												<div class="weather-summary-content">
+													<div class="weather-summary-title">
+														<h2 class="summary-day">
+															16:00
+														</h2>
+														<div class="summary-temperature">
+															<span class="summary-temperature-min">
+																26.2°C
+															</span>
+															<span class="summary-temperature-max">
+																/
+																<span class="summary-temperature-max-value">
+																	27.1°C
+																</span>
+															</span>
+														</div>
+														<div class="summary-description">
+															<img src="https://data.thoitiet.vn/weather/icons/10d.png" alt="Mưa cường độ nặng" class="summary-img">
+															<span class="summary-description-detail">
+																Mưa nhẹ
+															</span>
+														</div>
+														<div class="summary-humidity">
+															<span class="summary-icon">
+																<i data-lucide="droplet" class="w-4 h-4"></i>
+															</span>
+															<span>
+																91%
+															</span>
+														</div>
+														<div class="summary-speed">
+															<span class="summary-icon">
+																<i data-lucide="wind" class="w-4 h-4"></i>
+															</span>
+															<span>
+																7.02 km/giờ
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="separator-dashed m-0"></div>
+											<div class="weather-summary p-0">
+												<div class="weather-summary-content">
+													<div class="weather-summary-title">
+														<h2 class="summary-day">
+															19:00
+														</h2>
+														<div class="summary-temperature">
+															<span class="summary-temperature-min">
+																25.7°C
+															</span>
+															<span class="summary-temperature-max">
+																/
+																<span class="summary-temperature-max-value">
+																	26.6°C
+																</span>
+															</span>
+														</div>
+														<div class="summary-description">
+															<img src="https://data.thoitiet.vn/weather/icons/10n.png" alt="Mưa vừa" class="summary-img">
+															<span class="summary-description-detail">
+																Mưa vừa
+															</span>
+														</div>
+														<div class="summary-humidity">
+															<span class="summary-icon">
+																<i data-lucide="droplet" class="w-4 h-4"></i>
+															</span>
+															<span>
+																91%
+															</span>
+														</div>
+														<div class="summary-speed">
+															<span class="summary-icon">
+																<i data-lucide="wind" class="w-4 h-4"></i>
+															</span>
+															<span>
+																5.6 km/giờ
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="separator-dashed m-0"></div>
+											<div class="weather-summary p-0">
+												<div class="weather-summary-content">
+													<div class="weather-summary-title">
+														<h2 class="summary-day">
+															22:00
+														</h2>
+														<div class="summary-temperature">
+															<span class="summary-temperature-min">
+																25.9°C
+															</span>
+															<span class="summary-temperature-max">
+																/
+																<span class="summary-temperature-max-value">
+																	26.6°C
+																</span>
+															</span>
+														</div>
+														<div class="summary-description">
+															<img src="https://data.thoitiet.vn/weather/icons/10n.png" alt="Mưa vừa" class="summary-img">
+															<span class="summary-description-detail">
+																Mưa vừa
+															</span>
+														</div>
+														<div class="summary-humidity">
+															<span class="summary-icon">
+																<i data-lucide="droplet" class="w-4 h-4"></i>
+															</span>
+															<span>
+																92%
+															</span>
+														</div>
+														<div class="summary-speed">
+															<span class="summary-icon">
+																<i data-lucide="wind" class="w-4 h-4"></i>
+															</span>
+															<span>
+																6.06 km/giờ
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
