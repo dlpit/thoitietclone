@@ -27,8 +27,8 @@
 			--background: 0 0% 100%;
 			--foreground: 222.2 84% 4.9%;
 			--card: 0 0% 100%;
-			--card-foreground: 222.2 84% 4.9%;
 			--popover: 0 0% 100%;
+			--card-foreground: 222.2 84% 4.9%;
 			--popover-foreground: 222.2 84% 4.9%;
 			--primary: 221.2 83.2% 53.3%;
 			--primary-foreground: 210 40% 98%;
@@ -83,7 +83,6 @@
 			@apply shadow-2xl;
 			box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 			}
-
 			.current-weather {
 			@apply text-white rounded-3xl p-8 border border-white/20;
 			background: rgba(255, 255, 255, 0.15);
@@ -98,7 +97,6 @@
 			@apply w-20 h-20;
 			filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 			}
-
 			/* Navbar Styles */
 			.navbar {
 			@apply backdrop-blur-xl border-b;
@@ -111,7 +109,6 @@
 			@apply sticky top-0 z-50;
 			position: -webkit-sticky;
 			}
-
 			/* News Card Styles */
 			.news-card {
 			@apply rounded-2xl border border-white/20 backdrop-blur-xl;
@@ -212,7 +209,7 @@
 			}
 			.weather-detail {
 			@apply rounded-2xl p-4 my-2 border backdrop-blur-md;
-			background: rgba(255, 255, 255, 0.02);
+			background: rgba(255, 255, 255, 0.1);
 			border-color: rgba(255, 255, 255, 0.15);
 			}
 			.weather-detail .separator-dashed {
@@ -222,9 +219,19 @@
 			@apply rounded-2xl p-4 my-2 border;
 			border-color: rgba(255, 255, 255, 0.15);
 			}
-
 			.news-category-tag {
 			background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+			}
+			.news-item {
+			@apply border-b py-4 transition-colors duration-300 ease-in-out;
+			border-bottom-color: rgba(116, 185, 255, 0.1);
+			}
+			.news-item:hover {
+			@apply rounded-xl;
+			background-color: rgba(116, 185, 255, 0.05);
+			}
+			.news-item:last-child {
+			@apply border-b-0;
 			}
 			/* Section News Background */
 			.section-news {
@@ -310,7 +317,6 @@
 			.header-thoi-tiet-ngay {
 			@apply flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4;
 			}
-			
 			/* Mobile responsive for card header */
 			@media (max-width: 640px) {
 			.card-header {
@@ -338,7 +344,6 @@
 			.card-body {
 			@apply p-0;
 			}
-			
 			/* Mobile responsive for card body */
 			@media (max-width: 640px) {
 			.card-body {
@@ -406,105 +411,82 @@
 			.rain-item:has(p:contains("Mưa nhỏ")) > div:first-child p:last-child {
 			@apply text-yellow-600 font-bold;
 			}
-			
 			/* Weather Day Styles */
 			.weather-day {
 			@apply border-b border-gray-200 last:border-b-0;
 			}
-			
 			.weather-summary {
 			@apply flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors duration-200;
 			}
-			
 			.weather-summary-content {
 			@apply flex items-center justify-between w-full;
 			}
-			
 			.weather-summary-title {
 			@apply flex items-center gap-4 flex-1 justify-between;
 			}
-			
 			.summary-day {
 			@apply text-lg font-semibold text-gray-800 m-0 min-w-20;
 			}
-			
 			.summary-temperature {
 			@apply flex items-center text-lg font-bold text-gray-800 min-w-24;
 			}
-			
 			.summary-temperature-min {
 			@apply text-gray-600;
 			}
-			
 			.summary-temperature-max {
 			@apply text-gray-400;
 			}
-			
 			.summary-temperature-max-value {
 			@apply text-gray-800;
 			}
-			
 			.summary-description {
 			@apply flex items-center gap-2 min-w-32;
 			}
-			
 			.summary-img {
 			@apply w-8 h-8 flex-shrink-0;
 			}
-			
 			.summary-description-detail {
 			@apply text-sm text-gray-600 font-medium;
 			}
-			
 			.summary-humidity {
 			@apply flex items-center gap-1 text-sm text-gray-600 min-w-16;
 			}
-			
 			.summary-speed {
 			@apply flex items-center gap-1 text-sm text-gray-600 min-w-24;
 			}
-			
 			.summary-icon {
 			@apply flex items-center;
 			}
-			
 			.summary-icon svg {
 			@apply w-4 h-4;
 			}
-			
 			.weather-summary-toggle {
 			@apply flex items-center text-gray-400 ml-4;
 			}
-			
 			.weather-summary-toggle i {
 			@apply text-sm;
 			}
-			
-			
+			/* Weather Details Styles */
 			.weather-detail-cac-ngay {
 			display: flex;
 			justify-content: space-between;
 			padding: 0.5rem;
 			}
-			
 			.weather-content-item {
 			display: flex;
 			align-items: center;
 			min-width: 0;
 			flex-shrink: 0;
 			}
-			
 			.weather-content-item-sun {
 			display: flex;
 			align-items: center;
 			min-width: 0;
 			flex-shrink: 0;
 			}
-			
 			.weather-content-item-sun h6 {
 			@apply text-sm font-bold text-gray-800 mb-1;
 			}
-			
 			/* Mobile responsive for 2 column layout with center alignment */
 			@media (max-width: 640px) {
 			.weather-detail-cac-ngay {
@@ -581,7 +563,6 @@
 			height: 0.75rem;
 			}
 			}
-			
 			.weather-content-item-description {
 			display: flex;
 			align-items: center;
@@ -590,60 +571,46 @@
 			flex-basis: 100%;
 			margin-top: 0.5rem;
 			}
-			
 			.weather-content-item h6 {
 			@apply text-sm font-bold text-gray-800 mb-1;
 			}
-			
 			.weather-content-item h3 {
 			@apply text-sm font-bold text-gray-800;
 			}
-			
 			.weather-content-item .opacity-80 {
 			@apply text-sm font-bold text-gray-600;
 			}
-			
 			.weather-content-item .opacity-80 span {
 			@apply text-sm font-bold text-gray-600;
 			}
-			
 			.weather-sun {
 			@apply flex items-center gap-4;
 			}
-			
 			.weather-sun span {
 			@apply flex items-center gap-1 text-sm text-gray-700;
 			}
-			
 			.weather-sun i {
 			@apply w-4 h-4;
 			}
-			
 			.weather-icon {
 			@apply flex items-center justify-center;
 			}
-			
 			.weather-icon i {
 			@apply w-4 h-4 text-gray-600;
 			}
-			
 			.separator-dashed {
 			@apply border-t border-dashed border-gray-300;
 			}
-			
 			.separator-dashed.m-0 {
 			@apply my-0;
 			}
-			
 			/* Weather Content Styles for Hourly Details */
 			.weather-content {
 			@apply mt-2;
 			}
-			
 			.weather-content .weather-summary {
 			@apply p-3 hover:bg-gray-50;
 			}
-			
 			.weather-content .weather-summary-title {
 			display: flex;
 			align-items: center;
@@ -651,7 +618,6 @@
 			flex: 1 1 0%;
 			justify-content: space-around;
 			}
-			
 			.weather-content .summary-day {
 			font-size: 1rem;
 			line-height: 1.5rem;
@@ -660,7 +626,6 @@
 			margin: 0;
 			min-width: 4rem;
 			}
-			
 			.weather-content .summary-temperature {
 			display: flex;
 			align-items: center;
@@ -670,39 +635,30 @@
 			color: rgb(31 41 55);
 			min-width: 5rem;
 			}
-			
 			.weather-content .summary-temperature-min {
 			@apply text-sm text-gray-500;
 			}
-			
 			.weather-content .summary-temperature-max {
 			@apply text-gray-400;
 			}
-			
 			.weather-content .summary-temperature-max-value {
 			@apply text-lg font-bold text-gray-800;
 			}
-			
 			.weather-content .summary-description {
 			@apply flex items-center gap-2 min-w-28;
 			}
-			
 			.weather-content .summary-img {
 			@apply w-6 h-6 flex-shrink-0;
 			}
-			
 			.weather-content .summary-description-detail {
 			@apply text-xs text-gray-600 font-medium;
 			}
-			
 			.weather-content .summary-humidity {
 			@apply flex items-center gap-1 text-xs text-gray-600 min-w-12;
 			}
-			
 			.weather-content .summary-speed {
 			@apply flex items-center gap-1 text-xs text-gray-600 min-w-20;
 			}
-			
 			/* Mobile responsive for hourly details - 2 column layout with center alignment */
 			@media (max-width: 640px) {
 			.weather-content .weather-summary {
@@ -774,19 +730,108 @@
 			grid-column: span 1 / span 1;
 			}
 			}
+
+			/* TOC (Table of Contents) Styles */
+			.toc-container {
+				@apply mb-6 border border-gray-200 rounded-lg bg-gray-50 p-4;
+			}
+
+			.toc-title-container {
+				@apply flex items-center justify-between mb-3;
+			}
+
+			.toc-title {
+				@apply text-lg font-semibold text-gray-800 m-0;
+			}
+
+			.title-toggle .btn {
+				@apply px-3 py-1 text-sm border border-gray-300 rounded text-gray-600 hover:bg-gray-100 transition-all duration-200;
+			}
+
+			.title-toggle .btn.show {
+				@apply bg-gray-200 border-gray-400 text-gray-700;
+			}
+
+			.toc-links {
+				@apply transition-all duration-300 ease-in-out;
+			}
+
+			.ez-toc-list {
+				@apply list-none p-0 m-0 space-y-2;
+				counter-reset: toc-counter;
+			}
+
+			.ez-toc-list-level-1 > li {
+				@apply mb-2;
+				counter-increment: toc-counter;
+			}
+
+			.ez-toc-list-level-3 {
+				@apply list-none p-0 m-0 ml-4 mt-2 space-y-1;
+				counter-reset: toc-subcounter;
+			}
+
+			.ez-toc-list-level-3 > li {
+				counter-increment: toc-subcounter;
+			}
+
+			.ez-toc-link {
+				@apply transition-colors duration-200 no-underline block py-1;
+				color: #444;
+			}
+
+			.ez-toc-link:hover {
+				color: #444;
+				text-decoration: underline;
+			}
+
+			.ez-toc-heading-1 {
+				@apply font-medium;
+			}
+
+			.ez-toc-heading-1::before {
+				content: counter(toc-counter) ". ";
+				@apply font-semibold text-gray-700 mr-1;
+			}
+
+			.ez-toc-heading-2 {
+				@apply font-normal text-sm;
+			}
+
+			.ez-toc-heading-2::before {
+				content: counter(toc-counter) "." counter(toc-subcounter) " ";
+				@apply font-medium text-gray-600 mr-1;
+			}
+
+			.ez-toc-list-level-3 .ez-toc-link {
+				@apply text-sm;
+				color: #444;
+			}
+
+			.ez-toc-list-level-3 .ez-toc-link:hover {
+				color: #444;
+				text-decoration: underline;
+			}
+
+			/* Bootstrap icons compatibility */
+			.bi-list-nested::before {
+				content: "☰";
+				font-family: inherit;
+			}
+			
 			/* Mobile Menu Toggle Button Animation */
-#navbarToggle {
-    @apply relative;
-}
-.hamburger-line {
-    @apply w-6 h-0.5 bg-gray-600 transition-all duration-300;
-}
-.mobile-nav-link {
-    @apply flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm py-1;
-}
-#navbarToggle span {
-    @apply transition-all duration-300 ease-in-out;
-}
+			#navbarToggle {
+				@apply relative;
+			}
+			.hamburger-line {
+				@apply w-6 h-0.5 bg-gray-600 transition-all duration-300;
+			}
+			.mobile-nav-link {
+				@apply flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm py-1;
+			}
+			#navbarToggle span {
+				@apply transition-all duration-300 ease-in-out;
+			}
 			}
 		</style>
 	</head>
@@ -1982,7 +2027,16 @@
 									class="w-4 h-4 mx-1 text-white opacity-50"
 									></i>
 								<span class="text-blue-200 font-medium"
-									>Lượng mưa cả nước hôm nay</span
+									>Tin tổng hợp</span
+									>
+							</li>
+							<li class="flex items-center">
+								<i
+									data-lucide="chevron-right"
+									class="w-4 h-4 mx-1 text-white opacity-50"
+									></i>
+								<span class="text-blue-200 font-medium"
+									>Khám phá</span
 									>
 							</li>
 						</ol>
@@ -1990,1281 +2044,254 @@
 					<div class="flex flex-wrap lg:flex-nowrap gap-6 pb-8 text-white">
 						<!-- Left Content -->
 						<div class="w-full lg:w-2/3 order-2 lg:order-1">
-							<!-- List lượng mưa -->
-							<div class="card card-list-weather">
-								<div class="card-header header-thoi-tiet-ngay">
-									<h1 class="card-title">
-										<a href="/luong-mua">
-										Lượng mưa cả nước hôm nay
-										</a>
-									</h1>
-									<div class="share-button">
-										<div class="fb-like" data-href="https://thoitiet.vn/luong-mua" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-noi/luong-mua">
-												Hà Nội
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												99.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hương Sơn
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-giang/luong-mua">
-												Hà Giang
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												6.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đồng Tâm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-kan/luong-mua">
-												Bắc Kạn
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												28.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Bộc Bố 2
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thanh-pho-hue/luong-mua">
-												Thành phố Huế
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												28.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Điền Hương (Phong Điền)
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tuyen-quang/luong-mua">
-												Tuyên Quang
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												43.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đồng Quý
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lao-cai/luong-mua">
-												Lào Cai
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												159.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Làng Nhì
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dien-bien/luong-mua">
-												Điện Biên
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												17.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Mường Nhé
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lai-chau/luong-mua">
-												Lai Châu
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												21.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Phu Nậm Sap
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="son-la/luong-mua">
-												Sơn La
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												121 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Km46
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="yen-bai/luong-mua">
-												Yên Bái
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												17 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Minh Tiến
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hoa-binh/luong-mua">
-												Hòa Bình
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Vĩnh Đồng
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thai-nguyen/luong-mua">
-												Thái Nguyên
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												29.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đức Vân
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lang-son/luong-mua">
-												Lạng Sơn
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												31.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Chi Lăng
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-ninh/luong-mua">
-												Quảng Ninh
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												148.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Kỳ Thượng
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-giang/luong-mua">
-												Bắc Giang
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												41.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Khuôn Thần
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="phu-tho/luong-mua">
-												Phú Thọ
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												186.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hồ Cạn Thượng
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="vinh-phuc/luong-mua">
-												Vĩnh Phúc
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												18.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Lập Thạch
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-ninh/luong-mua">
-												Bắc Ninh
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												46.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đèo Hạ My
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hai-duong/luong-mua">
-												Hải Dương
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Bến Tắm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hai-phong/luong-mua">
-												Hải Phòng
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												20.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Cổ ngựa
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hung-yen/luong-mua">
-												Hưng Yên
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												48 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đa Cốc
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thai-binh/luong-mua">
-												Thái Bình
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Thụy Trường
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-nam/luong-mua">
-												Hà Nam
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hòa Mạc
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="nam-dinh/luong-mua">
-												Nam Định
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hải Đường
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ninh-binh/luong-mua">
-												Ninh Bình
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												187.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Yên Đồng
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thanh-hoa/luong-mua">
-												Thanh Hóa
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												357.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Xuân Bình
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="nghe-an/luong-mua">
-												Nghệ An
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												338.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Mỹ Sơn 1
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ha-tinh/luong-mua">
-												Hà Tĩnh
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												318.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hồ Mạc Khê
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-binh/luong-mua">
-												Quảng Bình
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												5.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Quảng Tiên
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-tri/luong-mua">
-												Quảng Trị
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												179.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hồ Vực Tròn
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa rất to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="thua-thien-hue/luong-mua">
-												Thừa Thiên Huế
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												1.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đỉnh Bạch Mã (Phú Lộc)
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="da-nang/luong-mua">
-												Đà Nẵng
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												17.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Nhà máy Thủy điện A Vương
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-nam/luong-mua">
-												Quảng Nam
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												0.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Ch'ơm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="quang-ngai/luong-mua">
-												Quảng Ngãi
-												</a>
-											</h2>
-											<p class="text-red-600 font-bold">
-												54.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Rờ Kơi
-											</p>
-											<p class="text-red-600 font-medium">
-												Mưa to
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-dinh/luong-mua">
-												Bình Định
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Chi cục Thủy lợi
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="phu-yen/luong-mua">
-												Phú Yên
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hòa Tâm
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="khanh-hoa/luong-mua">
-												Khánh Hòa
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Sơn Lâm
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ninh-thuan/luong-mua">
-												Ninh Thuận
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Vĩnh Hải
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-thuan/luong-mua">
-												Bình Thuận
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												16.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đa Mi
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="kon-tum/luong-mua">
-												Kon Tum
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												8.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Sa Thầy
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="gia-lai/luong-mua">
-												Gia Lai
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												40.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Thủy điện Sê San 3A
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dak-lak/luong-mua">
-												Đắk Lắk
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												2.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Yang Mao 5
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dak-nong/luong-mua">
-												Đắk Nông
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đăk Ha, Đăk G'Long
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="lam-dong/luong-mua">
-												Lâm Đồng
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												33.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hưng Bình, Đăk R'lấp
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-phuoc/luong-mua">
-												Bình Phước
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												4.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Minh Lập
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tay-ninh/luong-mua">
-												Tây Ninh
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												22.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hòa Thạnh
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="binh-duong/luong-mua">
-												Bình Dương
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Sở Sao
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dong-nai/luong-mua">
-												Đồng Nai
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												16.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Lộc Thạnh
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ba-ria-vung-tau/luong-mua">
-												Bà Rịa - Vũng Tàu
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												10.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Côn Đảo
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ho-chi-minh/luong-mua">
-												TP Hồ Chí Minh
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												9.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Bình Chánh
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="long-an/luong-mua">
-												Long An
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Tân Trụ
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tien-giang/luong-mua">
-												Tiền Giang
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Cống Rạch Mương
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ben-tre/luong-mua">
-												Bến Tre
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												0.2 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Phú Khánh
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="tra-vinh/luong-mua">
-												Trà Vinh
-												</a>
-											</h2>
-											<p class="text-gray-600 font-bold">
-												0 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Trà Cú
-											</p>
-											<p class="text-gray-600 font-medium">
-												Không mưa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="vinh-long/luong-mua">
-												Vĩnh Long
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Trà Cú
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="dong-thap/luong-mua">
-												Đồng Tháp
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												8.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Phú Mỹ
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="an-giang/luong-mua">
-												An Giang
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												44.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Nhơn Hội
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="kien-giang/luong-mua">
-												Kiên Giang
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												5.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Vĩnh Thuận
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="can-tho/luong-mua">
-												Cần Thơ
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												23.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Hỏa Tiến
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="hau-giang/luong-mua">
-												Hậu Giang
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												1.8 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Đông Phước A
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="soc-trang/luong-mua">
-												Sóc Trăng
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												3.6 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Kế Sách
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="bac-lieu/luong-mua">
-												Bạc Liêu
-												</a>
-											</h2>
-											<p class="text-yellow-600 font-bold">
-												12.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Ngan Dừa
-											</p>
-											<p class="text-yellow-600 font-medium">
-												Mưa nhỏ
-											</p>
-										</div>
-									</div>
-									<div class="rain-item">
-										<div class="flex justify-between items-center">
-											<h2>
-												<a href="ca-mau/luong-mua">
-												Cà Mau
-												</a>
-											</h2>
-											<p class="text-orange-600 font-bold">
-												39.4 mm
-											</p>
-										</div>
-										<div class="flex justify-between items-center mt-2">
-											<p class="text-gray-500">
-												đo tại Thới Bình
-											</p>
-											<p class="text-orange-600 font-medium">
-												Mưa vừa
-											</p>
+							<!-- Content Section -->
+							<section class="dia-diem-chi-tiet">
+								<div class="site-container">
+									<div class="bg-white rounded-lg shadow-lg">
+										<!-- Khám phá Section -->
+										<div class="p-6">
+											<!-- Header -->
+											<div class="mb-6">
+												<h1 class="text-2xl font-bold text-gray-800 mb-2">
+													<a href="/tin-tong-hop/kham-pha" class="hover:text-blue-600 transition-colors">
+														Khám phá
+													</a>
+												</h1>
+											</div>
+
+											<!-- Main Content Grid -->
+											<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+												<!-- Featured Article 1 -->
+												<div class="space-y-4">
+													<div class="relative group">
+														<div class="overflow-hidden rounded-lg">
+															<a href="/hien-tuong-xam-nhap-man-la-gi-rbyjtpyuvol.html" class="block">
+																<img src="https://data.thoitiet.vn/weather/2022/1/21/hau-qua-cua-xam-nhap-man.jpg" 
+																	 alt="Hiện tượng xâm nhập mặn là gì? Một số biện pháp nhằm hạn chế hiện tượng xâm nhập mặn"
+																	 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+															</a>
+														</div>
+														<div class="mt-3">
+															<a href="/tin-tong-hop/kham-pha" class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-2">
+																Khám phá
+															</a>
+															<a href="/hien-tuong-xam-nhap-man-la-gi-rbyjtpyuvol.html" class="block group">
+																<h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-2">
+																	Hiện tượng xâm nhập mặn là gì? Một số biện pháp nhằm hạn chế hiện tượng xâm nhập mặn
+																</h3>
+																<p class="text-gray-600 text-sm line-clamp-3">
+																	Hiện tượng xâm nhập mặn là quá trình thay thế nước ngọt bằng nước mặn trong các tầng có chứa nước ở ven biển do sự di chuyển của khối nước mặn vào tầng nước ngọt. Nói một cách ngắn gọn hơn thì sự xâm nhập mặn chính là sự tích tụ quá nhiều muối hòa tan ở trong đất​. Hãy cùng dubaothoitiet tìm hiểu về hiện tượng này ngay sau đây nhé
+																</p>
+															</a>
+														</div>
+													</div>
+												</div>
+
+												<!-- News List 1 -->
+												<div class="space-y-4">
+													<div class="flex space-x-3 group">
+														<a href="/suong-mu-la-gi-qpqxiywuaxk.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/20/suong-mu.jpg" 
+																 alt="Sương mù là gì? đặc điểm của 7 loại sương mù chính trên thế giới"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/suong-mu-la-gi-qpqxiywuaxk.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Sương mù là gì? đặc điểm của 7 loại sương mù chính trên thế giới
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+
+													<div class="flex space-x-3 group">
+														<a href="/ly-giai-nguyen-nhan-tai-sao-bau-troi-co-mau-xanh-gayrtlguzxv.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/14/tai-sa-bau-troi-co-mau-xanh.jpg" 
+																 alt="Lý giải nguyên nhân tại sao bầu trời có màu xanh"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/ly-giai-nguyen-nhan-tai-sao-bau-troi-co-mau-xanh-gayrtlguzxv.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Lý giải nguyên nhân tại sao bầu trời có màu xanh
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+
+													<div class="flex space-x-3 group">
+														<a href="/nuoc-ngheo-nhat-the-gioi-hien-nay-la-ai-viet-nam-ngheo-thu-may-tren-the-gioi-mlrqupguvkp.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/11/nuoc-ngheo-nhat-the-gioi-la-nuoc-nao.jpg" 
+																 alt="Nước nghèo nhất thế giới hiện nay là ai? Việt Nam nghèo thứ mấy trên thế giới?"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/nuoc-ngheo-nhat-the-gioi-hien-nay-la-ai-viet-nam-ngheo-thu-may-tren-the-gioi-mlrqupguvkp.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Nước nghèo nhất thế giới hiện nay là ai? Việt Nam nghèo thứ mấy trên thế giới?
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+
+													<div class="flex space-x-3 group">
+														<a href="/mua-axit-la-gi-rbdjupyuvol.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/10/mua-axit-tai-viet-nam.jpg" 
+																 alt="Mưa axit là gì? nguyên nhân, tác hại và các biện pháp giúp khắc phục mưa axit"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/mua-axit-la-gi-rbdjupyuvol.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Mưa axit là gì? nguyên nhân, tác hại và các biện pháp giúp khắc phục mưa axit
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Second Row -->
+											<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+												<!-- Featured Article 2 -->
+												<div class="space-y-4">
+													<div class="relative group">
+														<div class="overflow-hidden rounded-lg">
+															<a href="/nuoc-cat-la-gi-nuoc-cat-co-cong-dung-nhu-the-nao-qpjxsywuaxk.html" class="block">
+																<img src="https://data.thoitiet.vn/weather/2022/1/10/nuoc-cat-la-gi-thumnel.jpg" 
+																	 alt="Nước cất là gì? Nước cất có công dụng như thế nào?"
+																	 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+															</a>
+														</div>
+														<div class="mt-3">
+															<a href="/tin-tong-hop/kham-pha" class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-2">
+																Khám phá
+															</a>
+															<a href="/nuoc-cat-la-gi-nuoc-cat-co-cong-dung-nhu-the-nao-qpjxsywuaxk.html" class="block group">
+																<h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-2">
+																	Nước cất là gì? Nước cất có công dụng như thế nào?
+																</h3>
+																<p class="text-gray-600 text-sm line-clamp-3">
+																	Nước cất là gì? Và nước cất có công dụng gì?. Hãy cùng trang Dự báo thời tiết chúng tôi tìm ra lời giải đáp cho các câu hỏi trên nhé.
+																</p>
+															</a>
+														</div>
+													</div>
+												</div>
+
+												<!-- News List 2 -->
+												<div class="space-y-4">
+													<div class="flex space-x-3 group">
+														<a href="/3-tac-hai-cua-o-nhiem-moi-truong-nuoc-kmddikluxvq.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/7/o-nhiem-moi-truong-2.jpg" 
+																 alt="Ô nhiễm môi trường nước là gì? 3 tác hại của ô nhiễm nguồn nước có thể bạn chưa biết"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/3-tac-hai-cua-o-nhiem-moi-truong-nuoc-kmddikluxvq.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Ô nhiễm môi trường nước là gì? 3 tác hại của ô nhiễm nguồn nước có thể bạn chưa biết
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+
+													<div class="flex space-x-3 group">
+														<a href="/ap-thap-nhiet-doi-la-gi-bzzqurzuvxy.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/6/ap-thap-nhiet-doi.jpg" 
+																 alt="Áp thấp nhiệt đới là gì? 5 cách để phòng tránh áp thấp nhiệt đới"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/ap-thap-nhiet-doi-la-gi-bzzqurzuvxy.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Áp thấp nhiệt đới là gì? 5 cách để phòng tránh áp thấp nhiệt đới
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+
+													<div class="flex space-x-3 group">
+														<a href="/thien-thach-la-gi-cach-phan-biet-thien-thach-va-da-thuong-gaarulguzxv.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/5/thien-thach.jpg" 
+																 alt="Thiên thạch là gì? cách phân biệt thiên thạch và đá thường"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/thien-thach-la-gi-cach-phan-biet-thien-thach-va-da-thuong-gaarulguzxv.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Thiên thạch là gì? cách phân biệt thiên thạch và đá thường
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+
+													<div class="flex space-x-3 group">
+														<a href="/thoi-tiet-mua-dong-da-nang-vao-thang-may-co-nen-di-du-lich-o-da-nang-vao-mua-dong-hay-khong-jppwtakujaz.html" class="flex-shrink-0">
+															<img src="https://data.thoitiet.vn/weather/2022/1/5/da-nang-vao-mua-dong-co-nen-di-du-lich-khong.jpg" 
+																 alt="Thời tiết mùa đông Đà Nẵng vào tháng mấy? Có nên đi du lịch ở Đà Nẵng vào mùa đông hay không?"
+																 class="w-20 h-16 object-cover rounded">
+														</a>
+														<div class="flex-1 min-w-0">
+															<a href="/thoi-tiet-mua-dong-da-nang-vao-thang-may-co-nen-di-du-lich-o-da-nang-vao-mua-dong-hay-khong-jppwtakujaz.html" class="block group">
+																<h3 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+																	Thời tiết mùa đông Đà Nẵng vào tháng mấy? Có nên đi du lịch ở Đà Nẵng vào mùa đông hay không?
+																</h3>
+															</a>
+															<a href="/tin-tong-hop/kham-pha" class="text-xs text-blue-600 hover:text-blue-800">
+																Khám phá
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Pagination -->
+											<div class="flex justify-center mt-6">
+												<nav class="flex space-x-1">
+													<a href="/tin-tong-hop/kham-pha" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium">
+														1
+													</a>
+													<a href="/tin-tong-hop/kham-pha/trang-2" class="px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50">
+														2
+													</a>
+													<a href="/tin-tong-hop/kham-pha/trang-3" class="px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50">
+														3
+													</a>
+													<a href="/tin-tong-hop/kham-pha/trang-4" class="px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50">
+														4
+													</a>
+													<a href="/tin-tong-hop/kham-pha/trang-4" class="px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50">
+														»
+													</a>
+												</nav>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</section>
+                            
 						</div>
 						<!-- Right Content -->
 						<div class="w-full lg:w-1/3 order-1 lg:order-2">
@@ -3437,218 +2464,6 @@
 											<span class="font-bold" data-uv-index>3.52</span>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- News Section -->
-			<section class="py-5 section-news relative">
-				<div class="section-news-bg section-news-bg-night"></div>
-				<div class="site-container relative z-10">
-					<h3 class="text-3xl mb-4 text-white font-bold text-center">
-						Tin tức thời tiết
-					</h3>
-					<div class="news-card p-4">
-						<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-							<div>
-								<div class="news-item">
-									<div class="img-container mb-3">
-										<img
-											src="https://data.thoitiet.vn/weather/2022/1/4/tia-uv-la-gi.jpg"
-											class="w-full rounded"
-											alt="Tia UV là gì? Cách bảo vệ da dưới tác hại của tia UV"
-											/>
-									</div>
-									<span
-										class="inline-block px-3 py-1 mb-2 text-white text-sm rounded news-category-tag"
-										>Tin tổng hợp</span
-										>
-									<h5 class="font-bold mb-2">
-										<a
-											href="#"
-											class="no-underline text-gray-800 hover:text-blue-600 transition-colors"
-											>Tia UV là gì? Cách bảo vệ da dưới tác hại của tia UV</a
-											>
-									</h5>
-									<p class="text-gray-500">
-										Tia UV có lẽ là kẻ thù lớn nhất đối với làn da của chúng ta.
-										Không những thể còn chứa nhiều tiềm ẩn lớn gây tổn thương
-										mắt và nhiều vấn đề khác. Vậy các bạn đã hiểu tia Uv là gì?
-										Tác hại của tia Uv như thế nào đối với chúng ta hay chưa.
-									</p>
-								</div>
-							</div>
-							<div>
-								<div class="news-item">
-									<div class="flex mb-3">
-										<img
-											src="https://data.thoitiet.vn/weather/2021/11/30/hoang-hon-la-gi.jpg"
-											class="w-32 h-20 object-cover rounded mr-3"
-											alt="Hoàng hôn là gì ? 6+ ý nghĩa kỳ diệu của hoàng hôn"
-											/>
-										<div class="flex-1">
-											<span
-												class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag"
-												>Tin tổng hợp</span
-												>
-											<h6 class="font-bold mb-2">
-												<a
-													href="#"
-													class="no-underline text-gray-800 hover:text-blue-600 transition-colors"
-													>Hoàng hôn là gì ? 6+ ý nghĩa kỳ diệu của hoàng hôn</a
-													>
-											</h6>
-										</div>
-									</div>
-								</div>
-								<div class="news-item">
-									<div class="flex mb-3">
-										<img
-											src="https://data.thoitiet.vn/weather/2022/7/29/mua-dong.jpg"
-											class="w-32 h-20 object-cover rounded mr-3"
-											alt="Tin thời tiết ba miền những ngày cuối tháng 7, miền Bắc bước vào đợt mưa giông dài ngày từ tối nay"
-											/>
-										<div class="flex-1">
-											<span
-												class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag"
-												>Tin tổng hợp</span
-												>
-											<h6 class="font-bold mb-2">
-												<a
-													href="#"
-													class="no-underline text-gray-800 hover:text-blue-600 transition-colors"
-													>Tin thời tiết ba miền những ngày cuối tháng 7, miền
-												Bắc bước vào đợt mưa giông dài ngày từ tối nay</a
-													>
-											</h6>
-										</div>
-									</div>
-								</div>
-								<div class="news-item">
-									<div class="flex mb-3">
-										<img
-											src="https://data.thoitiet.vn/weather/2022/7/10/vung-thap.jpg"
-											class="w-32 h-20 object-cover rounded mr-3"
-											alt="Một vùng áp thấp hình thành giữa biển Đông, có khả năng mạnh lên thành áp thấp nhiệt đới!"
-											/>
-										<div class="flex-1">
-											<span
-												class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag"
-												>Tin tổng hợp</span
-												>
-											<h6 class="font-bold mb-2">
-												<a
-													href="#"
-													class="no-underline text-gray-800 hover:text-blue-600 transition-colors"
-													>Một vùng áp thấp hình thành giữa biển Đông, có khả
-												năng mạnh lên thành áp thấp nhiệt đới!</a
-													>
-											</h6>
-										</div>
-									</div>
-								</div>
-								<div class="news-item">
-									<div class="flex mb-3">
-										<img
-											src="https://data.thoitiet.vn/weather/2022/7/8/mua-dong.jpg"
-											class="w-32 h-20 object-cover rounded mr-3"
-											alt="Hôm nay mưa dông diễn ra ở nhiều khu vực trên cả nước"
-											/>
-										<div class="flex-1">
-											<span
-												class="inline-block px-2 py-1 mb-2 text-white text-xs rounded news-category-tag"
-												>Tin tổng hợp</span
-												>
-											<h6 class="font-bold mb-2">
-												<a
-													href="#"
-													class="no-underline text-gray-800 hover:text-blue-600 transition-colors"
-													>Hôm nay mưa dông diễn ra ở nhiều khu vực trên cả
-												nước</a
-													>
-											</h6>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div>
-								<!-- Khám phá thêm section -->
-								<h3 class="text-xl font-bold text-gray-800 mb-4">
-									Khám phá thêm
-								</h3>
-								<div class="flex flex-wrap gap-2">
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="info" class="w-4 h-4 mr-2"></i>
-									Bản tin thời tiết
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="thermometer" class="w-4 h-4 mr-2"></i>
-									Thiết bị dự báo thời tiết
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="wind" class="w-4 h-4 mr-2"></i>
-									Máy sưởi
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="thermometer" class="w-4 h-4 mr-2"></i>
-									Nhiệt kế
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="fan" class="w-4 h-4 mr-2"></i>
-									Quạt điện
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="cloud-rain" class="w-4 h-4 mr-2"></i>
-									Dự báo mưa
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="shield-check" class="w-4 h-4 mr-2"></i>
-									Nón bảo hiểm
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="phone" class="w-4 h-4 mr-2"></i>
-									Ứng dụng thời tiết
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="droplet" class="w-4 h-4 mr-2"></i>
-									Lượng mưa
-									</a>
-									<a
-										href="#"
-										class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full text-sm font-medium transition-colors duration-200"
-										>
-									<i data-lucide="newspaper" class="w-4 h-4 mr-2"></i>
-									Tin tức thời tiết
-									</a>
 								</div>
 							</div>
 						</div>

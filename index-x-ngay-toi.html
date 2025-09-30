@@ -480,14 +480,6 @@
 			@apply text-sm;
 			}
 			
-			/* Weather Details Styles */
-			.weather-detail {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			gap: 0.5rem;
-			padding: 1rem;
-			}
 			
 			.weather-detail-cac-ngay {
 			display: flex;
@@ -782,6 +774,19 @@
 			grid-column: span 1 / span 1;
 			}
 			}
+			/* Mobile Menu Toggle Button Animation */
+#navbarToggle {
+    @apply relative;
+}
+.hamburger-line {
+    @apply w-6 h-0.5 bg-gray-600 transition-all duration-300;
+}
+.mobile-nav-link {
+    @apply flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm py-1;
+}
+#navbarToggle span {
+    @apply transition-all duration-300 ease-in-out;
+}
 			}
 		</style>
 	</head>
